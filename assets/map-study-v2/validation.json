@@ -1,0 +1,17 @@
+{
+  "offlineHttpRequests": 0,
+  "browserErrors": [],
+  "gameFileUnchanged": true,
+  "gameIntegrated": false,
+  "artworkStatus": "whole-scene concept; raster edge alignment not certified",
+  "lockedLayout": {
+    "width": 1280,
+    "height": 1024,
+    "columns": 10,
+    "rows": 8,
+    "unit": 128,
+    "sourceLevel": 5,
+    "sourceFloorCells": 18
+  },
+  "sourceGameHash": "77bbd9af61a1d361e641308184f81a3eb6306f2d11a6a78ee10aa60b433a3dd5"
+}
