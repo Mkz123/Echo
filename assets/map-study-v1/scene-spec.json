@@ -1,0 +1,7 @@
+{
+ "greenhouse":{"name":"番茄温室","color":"#85c89a","floor":"#b99067","wall":"#263d2d","plate":"蘑菇按钮","timed":"三灯向日葵","box":"方西瓜","door":"番茄藤栅门","inverseDoor":"反向藤栅门","gate":"叶片单人闸","outfit":"草帽 · 叶绿围裙 · 园艺腰带"},
+ "workshop":{"name":"维修间","color":"#e0a259","floor":"#69726d","wall":"#2e3030","plate":"工具脚踏开关","timed":"焊机脉冲计时器","box":"橙色工具箱","door":"工业卷帘门","inverseDoor":"警示反向卷帘门","gate":"安全单人闸","outfit":"护目镜 · 皮革围裙 · 扳手腰带"},
+ "lab":{"name":"实验室","color":"#aa9bdb","floor":"#bfc3cb","wall":"#36334b","plate":"培养皿压力盘","timed":"离心机计时器","box":"冷藏样本箱","door":"紫光气密门","inverseDoor":"反向气密门","gate":"消毒单人闸","outfit":"白大褂 · 紫色袖口 · 样本胸牌"},
+ "bridge":{"name":"登舰廊桥","color":"#72c5dc","floor":"#768d9b","wall":"#263747","plate":"登舰扫描踏板","timed":"广播呼叫器","box":"硬壳行李箱","door":"登舰舱门","inverseDoor":"反向登舰舱门","gate":"验票单人闸","outfit":"海军蓝背心 · 青色肩线 · 登舰证"},
+ "station":{"name":"废弃空间站","color":"#c4c9bd","floor":"#636b6c","wall":"#262e32","plate":"工业压力板","timed":"过载电闸","box":"旧培养箱","door":"重型舱门","inverseDoor":"受损反向舱门","gate":"机械单人闸","outfit":"裸机旧外壳 · 红色天线灯 · 维修背包"}
+}
