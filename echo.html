@@ -436,6 +436,8 @@ function checkMove(L, ghosts, present, states, dir, guard = true) {
   const s = stepState(L, ghosts, states[t], tg, false);
   if (!s) return { ok: false, why: 'blocked' };
   if (guard && s.events.length) return { ok: false, why: 'paradox', events: s.events };
+  // every loop but the last happens in an earlier scene; only the station scene has a way out
+  if (cellAt(L, tg[0], tg[1]).exit && ghosts.length < L.selves - 1) return { ok: false, why: 'scene' };
   if (cellAt(L, tg[0], tg[1]).exit && !futureArrived(L, s)) return { ok: false, why: 'future' };
   return { ok: true, tg };
 }
@@ -523,8 +525,26 @@ resize();
 
 const PLATE_COL = ['#3fd0ff', '#ff5fa2', '#b6ff5c', '#ffb347'];
 const FUTURE_COL = '#ffe7a3';
-const GHOST_COL = ['#6fe3ff', '#b49bff', '#7dffc4', '#ff9bd2'];
-const TAPE_LETTER = 'ABCDEFGH';
+// Each loop of a level is played in its own scene. All scenes share one layout, and every
+// part keeps its function from scene to scene, so a valve in the greenhouse opens the
+// same door as a plate in the station. A level with n selves uses the first n-1 scenes
+// plus the station, which always comes last. `art` is where scene artwork plugs in.
+const SCENES = [
+  { id: 'greenhouse', name: '温室', short: '温', accent: '#7dffc4', tint: 'rgba(90,220,140,0.07)', outfit: '草帽',
+    parts: { plate: '浇水阀', door: '隔门', box: '花盆推车', timed: '定时喷淋', gate: '单人栅门' }, art: null },
+  { id: 'workshop', name: '维修间', short: '修', accent: '#ffb86b', tint: 'rgba(255,170,90,0.07)', outfit: '护目镜',
+    parts: { plate: '工具台踏板', door: '卷帘门', box: '工具箱', timed: '电焊闸', gate: '单人闸口' }, art: null },
+  { id: 'lab', name: '实验室', short: '实', accent: '#b49bff', tint: 'rgba(170,140,255,0.07)', outfit: '白大褂',
+    parts: { plate: '样本台', door: '气密门', box: '样本柜', timed: '离心机开关', gate: '消毒闸' }, art: null },
+  { id: 'bridge', name: '登舰廊桥', short: '桥', accent: '#6fe3ff', tint: 'rgba(100,220,255,0.07)', outfit: '登舰证',
+    parts: { plate: '登舰踏板', door: '舱门', box: '行李箱', timed: '广播按钮', gate: '检票闸机' }, art: null },
+  { id: 'station', name: '废弃空间站', short: '站', accent: '#e8ecf5', tint: null, outfit: null,
+    parts: { plate: '压力板', door: '门', box: '培养箱', timed: '过载电闸', gate: '单人闸机' }, art: null },
+];
+const STATION = SCENES[SCENES.length - 1];
+function sceneOf(L, loop) { return loop >= L.selves - 1 ? STATION : SCENES[Math.min(loop, SCENES.length - 2)]; }
+const curScene = () => sceneOf(G.L, G.ghosts.length);
+const ghostCol = i => sceneOf(G.L, i).accent;
 const FONT = '"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif';
 const MONO = '"SF Mono",Menlo,Consolas,"PingFang SC","Microsoft YaHei",monospace';
 
@@ -590,18 +610,17 @@ function showBanner(text, color = '#e8ecf5') { G.banner = { text, color, time: p
 const PARADOX_GUARD = true;
 const COLOR_NAME = ['蓝色', '粉色', '绿色', '琥珀色'];
 
+// Parts are named as they look in the scene the player is in now.
 function paradoxReason(ev) {
-  if (ev.kind === 'future') {
-    const c = cellAt(G.L, ev.pos[0], ev.pos[1]);
-    return `不能这样走：她的影像正站在${COLOR_NAME[c.door]}${c.inv ? '反向' : ''}门里，那一刻门会关上。等她走过去。`;
-  }
-  if (ev.kind === 'gate') return '不能这样走：一卷磁带里的你之后要从这道闸机过去，它只放一个人。把它留给磁带，换一条路。';
-  if (ev.kind === 'box') return '不能这样走：磁带里的你要推的培养箱会被挡住。别挡在箱子要去的地方。';
-  const c = cellAt(G.L, ev.pos[0], ev.pos[1]), col = COLOR_NAME[c.door];
-  if (c.inv) return `不能这样走：磁带里的你正要穿过${col}反向门，可那时它会关上。那一刻${col}压力板不能被踩住。`;
+  const P = curScene().parts, c = cellAt(G.L, ev.pos[0], ev.pos[1]), col = COLOR_NAME[c.door];
+  if (ev.kind === 'future') return `不能这样走：她的影像正站在${col}${c.inv ? '反向' : ''}${P.door}里，那一刻它会关上。等她走过去。`;
+  const who = `${sceneOf(G.L, ev.ghost).name}里的你`;
+  if (ev.kind === 'gate') return `不能这样走：${who}之后要从这道${P.gate}过去，它只放一个人。把它留给${who}，换一条路。`;
+  if (ev.kind === 'box') return `不能这样走：${who}要推的${P.box}会被挡住。别挡在它要去的地方。`;
+  if (c.inv) return `不能这样走：${who}正要穿过${col}反向${P.door}，可那时它会关上。那一刻${col}${P.plate}不能被踩住。`;
   const timed = G.L.timedPlates.some(([x, y]) => cellAt(G.L, x, y).plate === c.door);
-  return `不能这样走：磁带里的你正要穿过${col}门，可那时门是关着的。` +
-    (timed ? `那一刻${col}电闸得正在通电。` : `那一刻得有人或培养箱踩住${col}压力板。`);
+  return `不能这样走：${who}正要穿过${col}${P.door}，可那时它是关着的。` +
+    (timed ? `那一刻${col}${P.timed}得正在通电。` : `那一刻得有人或${P.box}踩住${col}${P.plate}。`);
 }
 function warnParadox(ev) {
   let msg = paradoxReason(ev);
@@ -620,7 +639,8 @@ function act(dir) {
   if (!mv.ok) {
     sfx.bump(); G.bump = { dir, time: now };
     if (mv.why === 'paradox') warnParadox(mv.events[0]);
-    else if (mv.why === 'gate') showBanner('这道闸机已经有人过去了。每一轮，它只放一个人。', '#ffd28a');
+    else if (mv.why === 'gate') showBanner(`这道${curScene().parts.gate}已经有人过去了。每一轮，它只放一个人。`, '#ffd28a');
+    else if (mv.why === 'scene') showBanner(`出口在${STATION.name}。按 Enter 闪回到下一个场景。`, '#ffd28a');
     else if (mv.why === 'future') showBanner('出口还没亮。等金色的影像走完她的路。', FUTURE_COL);
     return;
   }
@@ -659,7 +679,7 @@ function act(dir) {
 }
 function triggerParadox(ev) {
   const lay = layout();
-  const col = ev.kind === 'future' ? FUTURE_COL : GHOST_COL[ev.ghost % GHOST_COL.length];
+  const col = ev.kind === 'future' ? FUTURE_COL : ghostCol(ev.ghost);
   const cx = lay.ox + (ev.pos[0] + 0.5) * lay.cs, cy = lay.oy + (ev.pos[1] + 0.5) * lay.cs;
   for (let i = 0; i < 46; i++) {
     const a = Math.random() * Math.PI * 2, sp = 60 + Math.random() * 260;
@@ -667,9 +687,10 @@ function triggerParadox(ev) {
   }
   sfx.paradox();
   G.shakeT = performance.now();
+  const who = ev.kind === 'future' ? '' : `${sceneOf(G.L, ev.ghost).name}里的你`;
   showBanner(ev.kind === 'future' ? '卡带！她的影像被门夹断了'
-    : ev.kind === 'box' ? '卡带！磁带里的你推不动培养箱了，那段录像断掉了'
-    : '卡带！一卷磁带被门夹断了，那段录像消失了', '#ff7aa8');
+    : ev.kind === 'box' ? `闪回断了！${who}推不动东西了，那个场景消失了`
+    : `闪回断了！${who}被门夹住，那个场景消失了`, '#ff7aa8');
 }
 
 function undo() {
@@ -681,7 +702,7 @@ function undo() {
     G.present = G.ghosts.pop().slice();
     while (G.present.length > 1 && G.present.length - 1 >= G.L.T) G.present.pop();
     G.disp = curTick();
-    showBanner('倒带：回到上一卷磁带');
+    showBanner(`倒带：回到上一个场景 · ${curScene().name}`);
   } else return;
   recompute();
   sfx.undo();
@@ -699,7 +720,7 @@ function finishRewind() {
   recompute();
   G.disp = 0; G.mode = 'play'; G.lastActTime = performance.now();
   const n = G.ghosts.length;
-  showBanner(`● REC 磁带 ${TAPE_LETTER[n]} · ${n === 1 ? '磁带 A 会重放刚才的你' : `前 ${n} 卷磁带同时重放`}`);
+  showBanner(`闪回 · ${curScene().name}（${n + 1} / ${G.L.selves}）· ${n === 1 ? `${sceneOf(G.L, 0).name}里的你会同时行动` : `前 ${n} 个场景里的你会同时行动`}`);
   sfx.play();
 }// ================= Story & tutorial =================
 // Chapter numbers come from the order here, so inserting a chapter renumbers the rest.
@@ -771,12 +792,12 @@ function startStory(page, then) { G.mode = 'story'; G.story = { page, start: per
 function storyAllShown(now) { return now - G.story.start >= storyDuration(G.story.page); }
 
 const TUT_TEXT = [
-  '用方向键（或 WASD）走动。去踩住那块发光的压力板。',
-  '压力板被踩住，门就开了。可你一离开，它就会关上。走下来试试。',
-  '门要两个人。每卷磁带只能录十几步（看上方的磁带长度）。回到压力板上站好，然后按 Enter 倒带。',
-  '磁带 A 正在重放：刚才的你会把每一步原样再做一遍。你先走到门前。',
-  '门还关着，磁带里的你还在路上。按空格原地等一步，直到门上出现「下一步开」。',
-  '它踩住压力板了。现在走进门里，然后走进出口。',
+  '这里是温室。用方向键（或 WASD）走动，去踩住那个发光的浇水阀。',
+  '浇水阀被踩住，隔门就开了。可你一离开，它就会关上。走下来试试。',
+  '门要两个人。每个场景只有十几步（看上方的磁带长度）。回到浇水阀上站好，然后按 Enter 闪回到下一个场景。',
+  '这里是废弃空间站。温室里的你（虚影）会把刚才的每一步同时再做一遍，它踩的浇水阀就是这里的压力板。你先走到门前。',
+  '门还关着，温室里的你还在路上。按空格原地等一步，直到门上出现「下一步开」。',
+  '温室里的你踩住了浇水阀，这里的压力板也跟着被踩下了。现在走进门里，然后走进出口。',
 ];const same = (a, b) => a[0] === b[0] && a[1] === b[1];
 function presentOnPlate() {
   const c = G.present[G.present.length - 1];
@@ -810,7 +831,7 @@ function endLoopEarly() {
   if (G.mode !== 'play') return;
   if (tutorialBlocksEnd()) { showBanner('先站到压力板上，再按 Enter 倒带', '#ffe08a'); return; }
   if (G.ghosts.length < G.L.selves - 1) startRewind();
-  else showBanner(G.L.selves === 1 ? '没有空白磁带了。这一次，只有你。' : '没有空白磁带了，没法再倒带', '#ffb3b3');
+  else showBanner(G.L.selves === 1 ? '没有别的场景了。这一次，只有你。' : `已经在${STATION.name}了，没有下一个场景`, '#ffb3b3');
 }
 function timeUp() {
   if (tutorialBlocksEnd()) {
@@ -927,10 +948,12 @@ function drawScene(f, lay, now, dt) {
       ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1; ctx.strokeRect(px + 0.5, py + 0.5, cs - 1, cs - 1);
     }
   }
+  // placeholder until scene art arrives
+  if (curScene().tint) { ctx.fillStyle = curScene().tint; ctx.fillRect(ox, oy, cs * L.w, cs * L.h); }
 
   // exit portal: stays dim until the gold walker has arrived
   {
-    const [ex, ey] = C(L.exit[0], L.exit[1]), lit = futureArrived(L, S) ? 1 : 0.25;
+    const [ex, ey] = C(L.exit[0], L.exit[1]), lit = futureArrived(L, S) && G.ghosts.length >= L.selves - 1 ? 1 : 0.25;
     const g = ctx.createRadialGradient(ex, ey, 0, ex, ey, cs * 0.6);
     g.addColorStop(0, `rgba(160,230,255,${0.35 * lit})`); g.addColorStop(1, 'rgba(160,230,255,0)');
     ctx.fillStyle = g; ctx.fillRect(ex - cs, ey - cs, cs * 2, cs * 2);
@@ -1089,7 +1112,7 @@ function drawScene(f, lay, now, dt) {
 
   // trails
   G.ghosts.forEach((g, i) => {
-    const col = GHOST_COL[i % GHOST_COL.length];
+    const col = ghostCol(i);
     const pts = g.map(p => C(p[0], p[1]));
     let death = Infinity;
     for (let t = 0; t < st.length; t++) if (!st[t].alive[i]) { death = t; break; }
@@ -1128,7 +1151,7 @@ function drawScene(f, lay, now, dt) {
       if (a[0] === b[0] && a[1] === b[1]) return;
       const [cx, cy] = C(b[0], b[1]);
       ctx.beginPath(); ctx.arc(cx, cy, cs * 0.12, 0, Math.PI * 2);
-      ctx.strokeStyle = rgba(GHOST_COL[i % GHOST_COL.length], 0.7); ctx.lineWidth = 2; ctx.stroke();
+      ctx.strokeStyle = rgba(ghostCol(i), 0.7); ctx.lineWidth = 2; ctx.stroke();
     });
   }
 
@@ -1136,7 +1159,7 @@ function drawScene(f, lay, now, dt) {
   G.ghosts.forEach((g, i) => {
     if (!S.alive[i]) return;
     const a = posAt(g, fl), b = posAt(g, fl + 1), p = posAt(g, ti);
-    items.push({ x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), col: GHOST_COL[i % GHOST_COL.length], face: facingAt(g, fl + 1), seed: i });
+    items.push({ x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), col: ghostCol(i), scene: sceneOf(L, i), face: facingAt(g, fl + 1), seed: i });
   });
   const fw = G.mode === 'farewell' ? G.fw : null;
   L.future.forEach((route, j) => {
@@ -1148,7 +1171,7 @@ function drawScene(f, lay, now, dt) {
   {
     const P = G.present, n = P.length - 1;
     const a = P[Math.min(fl, n)], b = P[Math.min(fl + 1, n)], p = P[Math.min(ti, n)];
-    const it = { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), present: true, face: facingAt(P, Math.min(fl + 1, n)) };
+    const it = { x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), present: true, scene: curScene(), face: facingAt(P, Math.min(fl + 1, n)) };
     // once out of the door, 47 turns round to look back at her
     if (fw && now - fw.start > 500) it.face = [-1, 0];
     if (fw && fw.waved) it.hop = now - fw.waved;
@@ -1203,7 +1226,7 @@ function drawScene(f, lay, now, dt) {
 
 const WAVE_HOLD_MS = 1400, FADE_MS = 2200;
 function drawRobot(cx, cy, r, it, now) {
-  const [fx, fy] = it.face, holo = !it.present, col = holo ? it.col : '#dfe7f2';
+  const [fx, fy] = it.face, holo = !it.present, col = holo ? it.col : '#dfe7f2', sc = it.scene;
   let blink = 1;
   if (it.hop !== undefined && it.hop < 800) {
     const q = it.hop / 800;
@@ -1211,10 +1234,7 @@ function drawRobot(cx, cy, r, it, now) {
     if (q > 0.35 && q < 0.6) blink = 0.15;
   }
   ctx.save();
-  if (holo) {
-    ctx.globalAlpha = 0.78 + 0.18 * Math.sin(now / 170 + it.seed * 2);
-    if (Math.random() < 0.03) cx += (Math.random() - 0.5) * r * 0.6;
-  }
+  if (holo) ctx.globalAlpha = 0.5;
   const w = r * 1.9, h = r * 1.7, x = cx - w / 2, y = cy - h / 2 + r * 0.1;
   ctx.shadowColor = holo ? col : '#9fe8ff'; ctx.shadowBlur = holo ? 14 : 22;
   rr(x, y, w, h, r * 0.42);
@@ -1231,10 +1251,13 @@ function drawRobot(cx, cy, r, it, now) {
   ctx.fillStyle = holo ? col : '#7fe6ff'; ctx.fill();
   ctx.beginPath(); ctx.arc(lx - r * 0.1, ly - r * 0.1, r * 0.08, 0, Math.PI * 2);
   ctx.fillStyle = 'rgba(255,255,255,0.85)'; ctx.fill();
-  if (holo) {
-    rr(x, y, w, h, r * 0.42); ctx.clip();
-    ctx.fillStyle = 'rgba(7,9,15,0.4)';
-    for (let yy = y + (now / 60) % 3; yy < y + h; yy += 3) ctx.fillRect(x, yy, w, 1);
+  // outfit placeholder: the scene's initial on a tag, replaced later by per-scene costume art
+  if (sc && sc.outfit) {
+    const bx = x + w - r * 0.1, by = y + h - r * 0.1, br = Math.max(7, r * 0.36);
+    ctx.globalAlpha = 1;
+    ctx.beginPath(); ctx.arc(bx, by, br, 0, Math.PI * 2); ctx.fillStyle = sc.accent; ctx.fill();
+    ctx.fillStyle = '#0b1220'; ctx.font = `700 ${Math.round(br * 1.2)}px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(sc.short, bx, by + 0.5);
   }
   ctx.restore();
 }
@@ -1288,27 +1311,19 @@ function drawParticles(dt) {
 }
 
 const pad = (n, k) => String(n).padStart(k, '0');
-function drawCassetteIcon(x, y, kind, col, letter, now) {
-  const w = 26, h = 16;
-  rr(x - w / 2, y - h / 2, w, h, 3);
-  if (kind === 'blank') { ctx.strokeStyle = '#3a4560'; ctx.lineWidth = 1.5; ctx.stroke(); }
-  else { ctx.fillStyle = kind === 'rec' ? '#e8ecf5' : rgba(col, 0.9); ctx.fill(); }
-  for (const sd of [-1, 1]) {
-    const rx = x + sd * 6, ry = y - 1;
-    ctx.beginPath(); ctx.arc(rx, ry, 3.2, 0, Math.PI * 2);
-    if (kind === 'blank') { ctx.strokeStyle = '#3a4560'; ctx.lineWidth = 1; ctx.stroke(); }
-    else { ctx.fillStyle = '#0b0f1a'; ctx.fill(); }
-    if (kind === 'rec') {
-      const a = now / 300;
-      ctx.strokeStyle = '#e8ecf5'; ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx + Math.cos(a) * 3, ry + Math.sin(a) * 3); ctx.stroke();
-    }
+function drawSceneChip(x, y, sc, kind, now) {
+  const w = 74, h = 22;
+  rr(x - w / 2, y - h / 2, w, h, 11);
+  if (kind === 'next') { ctx.strokeStyle = '#3a4560'; ctx.lineWidth = 1.5; ctx.stroke(); }
+  else if (kind === 'done') { ctx.fillStyle = rgba(sc.accent, 0.22); ctx.fill(); ctx.strokeStyle = rgba(sc.accent, 0.6); ctx.lineWidth = 1; ctx.stroke(); }
+  else { ctx.fillStyle = rgba(sc.accent, 0.9); ctx.fill(); }
+  ctx.fillStyle = kind === 'next' ? '#55607a' : kind === 'done' ? sc.accent : '#0b1220';
+  ctx.font = `600 12px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(sc.name, x, y + 0.5);
+  if (kind === 'now' && Math.floor(now / 500) % 2) {
+    ctx.beginPath(); ctx.arc(x - w / 2 + 2, y - h / 2 + 2, 3.5, 0, Math.PI * 2); ctx.fillStyle = '#ff4d5e'; ctx.fill();
   }
-  ctx.fillStyle = kind === 'blank' ? '#3a4560' : kind === 'rec' ? '#ffffff' : col;
-  ctx.font = `600 10px ${MONO}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  ctx.fillText(letter, x, y + 17);
 }
-
 function drawHUD(f, now) {
   const L = G.L;
   ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -1329,16 +1344,13 @@ function drawHUD(f, now) {
   ctx.font = `500 12px ${FONT}`; ctx.textAlign = 'right';
   ctx.fillText('磁带长度', tx - 12, ty + th / 2);
 
-  const total = L.selves, gs = 34, sy = 104, sx = VW / 2 - ((total - 1) * gs) / 2;
-  for (let j = 0; j < total; j++) {
-    const kind = j < G.ghosts.length ? 'used' : j === G.ghosts.length ? 'rec' : 'blank';
-    drawCassetteIcon(sx + j * gs, sy, kind, GHOST_COL[j % GHOST_COL.length], TAPE_LETTER[j], now);
-  }
+  const total = L.selves, gs = 84, sy = 104, sx = VW / 2 - ((total - 1) * gs) / 2;
+  for (let j = 0; j < total; j++) drawSceneChip(sx + j * gs, sy, sceneOf(L, j), j < G.ghosts.length ? 'done' : j === G.ghosts.length ? 'now' : 'next', now);
   ctx.fillStyle = '#8a94ad'; ctx.font = `500 12px ${FONT}`; ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
-  ctx.fillText('磁带', sx - 24, sy);
+  ctx.fillText('场景', sx - 50, sy);
   const Sf = G.states[clamp(Math.round(f), 0, G.states.length - 1)];
   if (L.future.length) {
-    const x = sx + (total - 1) * gs + 34;
+    const x = sx + (total - 1) * gs + 56;
     ctx.save();
     ctx.globalAlpha = futureArrived(L, Sf) ? 1 : 0.45; ctx.fillStyle = FUTURE_COL;
     ctx.beginPath(); ctx.arc(x, sy - 6, 3.5, 0, Math.PI * 2); ctx.fill();
@@ -1373,7 +1385,7 @@ function drawOSD(now) {
   if (m === 'play') {
     ctx.fillStyle = Math.floor(now / 500) % 2 ? '#ff4d5e' : 'rgba(255,77,94,0.3)';
     ctx.fillText('●', 28, 30);
-    ctx.fillStyle = '#ffffff'; ctx.fillText(`REC  ${TAPE_LETTER[G.ghosts.length]}`, 48, 30);
+    ctx.fillStyle = '#ffffff'; ctx.fillText(`REC  ${curScene().name}`, 48, 30);
   } else {
     ctx.fillStyle = '#ffffff';
     ctx.fillText(m === 'rewind' ? '◀◀ REW' : m === 'fail' || (m === 'farewell' && G.fw.stop) ? '■ STOP' : '▶ PLAY', 28, 30);
@@ -1457,7 +1469,7 @@ function drawTitle(now) {
   ctx.fillStyle = '#f2f5fb'; ctx.font = `800 56px ${FONT}`; ctx.fillText('第 47 号磁带', VW / 2, ty);
   ctx.fillStyle = '#6b7690'; ctx.font = `600 14px ${MONO}`; ctx.fillText('T A P E   4 7', VW / 2, ty + 44);
   ctx.fillStyle = '#c3cbe0'; ctx.font = `400 18px ${FONT}`; ctx.fillText('有些门，一个人打不开。', VW / 2, ty + 86);
-  ctx.fillStyle = '#8a94ad'; ctx.font = `400 15px ${FONT}`; ctx.fillText('把自己录下来，倒带，再和录像里的自己一起开门。', VW / 2, ty + 116);
+  ctx.fillStyle = '#8a94ad'; ctx.font = `400 15px ${FONT}`; ctx.fillText('每一步都在不同的场景里，所有场景里的你一起开门。', VW / 2, ty + 116);
   ctx.globalAlpha = 0.55 + 0.45 * Math.sin(now / 400);
   ctx.fillStyle = '#ffffff'; ctx.font = `600 18px ${FONT}`; ctx.fillText('按 Enter 开始', VW / 2, ty + 162);
   ctx.globalAlpha = 1;
@@ -1559,6 +1571,9 @@ function drawRewindFX(lay, now) {
   ctx.fillStyle = 'rgba(255,60,90,0.6)'; ctx.fillText('◀◀ REW', cx - 3, cy);
   ctx.fillStyle = 'rgba(60,220,255,0.6)'; ctx.fillText('◀◀ REW', cx + 3, cy);
   ctx.fillStyle = '#ffffff'; ctx.fillText('◀◀ REW', cx, cy);
+  const next = sceneOf(G.L, G.ghosts.length + 1);
+  ctx.font = `600 20px ${FONT}`; ctx.fillStyle = next.accent;
+  ctx.fillText(`闪回 → ${next.name}`, cx, cy + 50);
 }
 
 // After each clear, a few seconds of the crew's old audio come back.
@@ -1591,7 +1606,7 @@ function drawTapeCard(now) {
   }
   ctx.stroke();
   ctx.textAlign = 'center'; ctx.font = `400 13px ${FONT}`; ctx.fillStyle = '#7a85a0';
-  ctx.fillText(`用了 ${G.ghosts.length + 1} 卷磁带 · 共 ${G.replay.ticks} 步`, VW / 2, y + h - 52);
+  ctx.fillText(`${G.ghosts.length + 1} 个场景 · 共 ${G.replay.ticks} 步`, VW / 2, y + h - 52);
   ctx.fillText(`${last ? 'Enter 看结局' : 'Enter 下一关'} · 空格 重看回放 · R 重玩`, VW / 2, y + h - 26);
 }
 
@@ -1680,7 +1695,7 @@ function frame(now) {
     if (G.mode === 'rewind') drawRewindFX(lay, now);
     if (G.mode === 'replay' && now >= G.replay.start) {
       ctx.font = `600 14px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      const txt = `▶ 回放 · ${G.ghosts.length + 1} 卷磁带同时播放`;
+      const txt = `▶ 回放 · ${G.ghosts.length + 1} 个场景同时进行`;
       const w = ctx.measureText(txt).width + 32, y = lay.oy + lay.cs * G.L.h + 24;
       rr(VW / 2 - w / 2, y - 13, w, 26, 13); ctx.fillStyle = 'rgba(200,243,255,0.12)'; ctx.fill();
       ctx.fillStyle = '#c8f3ff'; ctx.fillText(txt, VW / 2, y);
@@ -1705,7 +1720,7 @@ function frame(now) {
     drawBanner(lay, now);
 
     if (G.mode === 'won') drawTapeCard(now);
-    else if (G.mode === 'fail') drawCard('磁带用完了', G.L.farewell ? '她还在门外等。' : '已经没有空白磁带了。', 'Z 倒带一格 · R 重来', '#ff9a9a');
+    else if (G.mode === 'fail') drawCard('时间到了', G.L.farewell ? '她还在门外等。' : `已经在${STATION.name}，没有下一个场景了。`, 'Z 倒带一格 · R 重来', '#ff9a9a');
     else if (G.mode === 'farewell') drawFarewell(lay, now);
   }
   drawVHS();
