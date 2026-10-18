@@ -1,0 +1,370 @@
+{
+  "version": 3,
+  "status": "preview-only",
+  "alignment": "source-layout-guided-painting-needs-edge-review",
+  "sourceHash": "77bbd9af61a1d361e641308184f81a3eb6306f2d11a6a78ee10aa60b433a3dd5",
+  "coreHash": "459f0b373b6b405b664442068cc355ba9862b76aa8e7125b63bf8b63aecb5aac",
+  "uniquePaintings": 35,
+  "entries": [
+    {
+      "level": 1,
+      "name": "唤醒",
+      "scene": "greenhouse",
+      "key": "greenhouse-01",
+      "png": "paintings/greenhouse-01.png",
+      "webp": "webp/greenhouse-01.webp",
+      "guide": "guides/01.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 1,
+      "name": "唤醒",
+      "scene": "station",
+      "key": "station-01",
+      "png": "paintings/station-01.png",
+      "webp": "webp/station-01.webp",
+      "guide": "guides/01.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 2,
+      "name": "双人门禁",
+      "scene": "greenhouse",
+      "key": "greenhouse-02",
+      "png": "paintings/greenhouse-02.png",
+      "webp": "webp/greenhouse-02.webp",
+      "guide": "guides/02.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 2,
+      "name": "双人门禁",
+      "scene": "station",
+      "key": "station-02",
+      "png": "paintings/station-02.png",
+      "webp": "webp/station-02.webp",
+      "guide": "guides/02.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 3,
+      "name": "接力",
+      "scene": "greenhouse",
+      "key": "greenhouse-03",
+      "png": "paintings/greenhouse-03.png",
+      "webp": "webp/greenhouse-03.webp",
+      "guide": "guides/03.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 3,
+      "name": "接力",
+      "scene": "workshop",
+      "key": "workshop-03",
+      "png": "paintings/workshop-03.png",
+      "webp": "webp/workshop-03.webp",
+      "guide": "guides/03.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 3,
+      "name": "接力",
+      "scene": "station",
+      "key": "station-03",
+      "png": "paintings/station-03.png",
+      "webp": "webp/station-03.webp",
+      "guide": "guides/03.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 4,
+      "name": "培养箱",
+      "scene": "greenhouse",
+      "key": "greenhouse-04",
+      "png": "paintings/greenhouse-04.png",
+      "webp": "webp/greenhouse-04.webp",
+      "guide": "guides/04.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 4,
+      "name": "培养箱",
+      "scene": "station",
+      "key": "station-04",
+      "png": "paintings/station-04.png",
+      "webp": "webp/station-04.webp",
+      "guide": "guides/04.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 5,
+      "name": "借来的培养箱",
+      "scene": "greenhouse",
+      "key": "greenhouse-05",
+      "png": "paintings/greenhouse-05.png",
+      "webp": "webp/greenhouse-05.webp",
+      "guide": "guides/05.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 5,
+      "name": "借来的培养箱",
+      "scene": "station",
+      "key": "station-05",
+      "png": "paintings/station-05.png",
+      "webp": "webp/station-05.webp",
+      "guide": "guides/05.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 6,
+      "name": "一机两用",
+      "scene": "greenhouse",
+      "key": "greenhouse-06",
+      "png": "paintings/greenhouse-06.png",
+      "webp": "webp/greenhouse-06.webp",
+      "guide": "guides/06.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 6,
+      "name": "一机两用",
+      "scene": "station",
+      "key": "station-06",
+      "png": "paintings/station-06.png",
+      "webp": "webp/station-06.webp",
+      "guide": "guides/06.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 7,
+      "name": "过载电闸",
+      "scene": "greenhouse",
+      "key": "greenhouse-07",
+      "png": "paintings/greenhouse-07.png",
+      "webp": "webp/greenhouse-07.webp",
+      "guide": "guides/07.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 7,
+      "name": "过载电闸",
+      "scene": "station",
+      "key": "station-07",
+      "png": "paintings/station-07.png",
+      "webp": "webp/station-07.webp",
+      "guide": "guides/07.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 8,
+      "name": "三秒",
+      "scene": "greenhouse",
+      "key": "greenhouse-08",
+      "png": "paintings/greenhouse-08.png",
+      "webp": "webp/greenhouse-08.webp",
+      "guide": "guides/08.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 8,
+      "name": "三秒",
+      "scene": "workshop",
+      "key": "workshop-08",
+      "png": "paintings/workshop-08.png",
+      "webp": "webp/workshop-08.webp",
+      "guide": "guides/08.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 8,
+      "name": "三秒",
+      "scene": "station",
+      "key": "station-08",
+      "png": "paintings/station-08.png",
+      "webp": "webp/station-08.webp",
+      "guide": "guides/08.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 9,
+      "name": "单人闸机",
+      "scene": "greenhouse",
+      "key": "greenhouse-09",
+      "png": "paintings/greenhouse-09.png",
+      "webp": "webp/greenhouse-09.webp",
+      "guide": "guides/09.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 9,
+      "name": "单人闸机",
+      "scene": "station",
+      "key": "station-09",
+      "png": "paintings/station-09.png",
+      "webp": "webp/station-09.webp",
+      "guide": "guides/09.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 10,
+      "name": "撤离名单",
+      "scene": "greenhouse",
+      "key": "greenhouse-10",
+      "png": "paintings/greenhouse-10.png",
+      "webp": "webp/greenhouse-10.webp",
+      "guide": "guides/10.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 10,
+      "name": "撤离名单",
+      "scene": "station",
+      "key": "station-10",
+      "png": "paintings/station-10.png",
+      "webp": "webp/station-10.webp",
+      "guide": "guides/10.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 11,
+      "name": "卡带",
+      "scene": "greenhouse",
+      "key": "greenhouse-11",
+      "png": "paintings/greenhouse-11.png",
+      "webp": "webp/greenhouse-11.webp",
+      "guide": "guides/11.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 11,
+      "name": "卡带",
+      "scene": "workshop",
+      "key": "workshop-11",
+      "png": "paintings/workshop-11.png",
+      "webp": "webp/workshop-11.webp",
+      "guide": "guides/11.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 11,
+      "name": "卡带",
+      "scene": "station",
+      "key": "station-11",
+      "png": "paintings/station-11.png",
+      "webp": "webp/station-11.webp",
+      "guide": "guides/11.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 12,
+      "name": "三卷磁带",
+      "scene": "greenhouse",
+      "key": "greenhouse-12",
+      "png": "paintings/greenhouse-12.png",
+      "webp": "webp/greenhouse-12.webp",
+      "guide": "guides/12.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 12,
+      "name": "三卷磁带",
+      "scene": "workshop",
+      "key": "workshop-12",
+      "png": "paintings/workshop-12.png",
+      "webp": "webp/workshop-12.webp",
+      "guide": "guides/12.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 12,
+      "name": "三卷磁带",
+      "scene": "station",
+      "key": "station-12",
+      "png": "paintings/station-12.png",
+      "webp": "webp/station-12.webp",
+      "guide": "guides/12.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 13,
+      "name": "门那边的人",
+      "scene": "greenhouse",
+      "key": "greenhouse-13",
+      "png": "paintings/greenhouse-13.png",
+      "webp": "webp/greenhouse-13.webp",
+      "guide": "guides/13.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 13,
+      "name": "门那边的人",
+      "scene": "station",
+      "key": "station-13",
+      "png": "paintings/station-13.png",
+      "webp": "webp/station-13.webp",
+      "guide": "guides/13.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 14,
+      "name": "所有的磁带",
+      "scene": "greenhouse",
+      "key": "greenhouse-14",
+      "png": "paintings/greenhouse-14.png",
+      "webp": "webp/greenhouse-14.webp",
+      "guide": "guides/14.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 14,
+      "name": "所有的磁带",
+      "scene": "workshop",
+      "key": "workshop-14",
+      "png": "paintings/workshop-14.png",
+      "webp": "webp/workshop-14.webp",
+      "guide": "guides/14.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 14,
+      "name": "所有的磁带",
+      "scene": "lab",
+      "key": "lab-14",
+      "png": "paintings/lab-14.png",
+      "webp": "webp/lab-14.webp",
+      "guide": "guides/14.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 14,
+      "name": "所有的磁带",
+      "scene": "bridge",
+      "key": "bridge-14",
+      "png": "paintings/bridge-14.png",
+      "webp": "webp/bridge-14.webp",
+      "guide": "guides/14.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 14,
+      "name": "所有的磁带",
+      "scene": "station",
+      "key": "station-14",
+      "png": "paintings/station-14.png",
+      "webp": "webp/station-14.webp",
+      "guide": "guides/14.png",
+      "sharedLayout": false
+    },
+    {
+      "level": 15,
+      "name": "第 47 号磁带",
+      "scene": "station",
+      "key": "station-01",
+      "png": "paintings/station-01.png",
+      "webp": "webp/station-01.webp",
+      "guide": "guides/01.png",
+      "sharedLayout": true
+    }
+  ]
+}

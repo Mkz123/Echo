@@ -1,0 +1,15 @@
+Use case: illustration-story. One continuous hand-inked watercolor comic illustration for a top-down 2D game environment. Strict orthographic overhead camera. Fill the entire rectangular canvas, exact ratio 15:11. The ONE input image is the full exact floor plan, light cream = clear continuous floor, dark green = built-in solid laboratory equipment and specimen cabinets. Follow this plan literally. Do not crop, reframe or invent a different room.
+CRITICAL: this layout has THREE separate long horizontal corridors, NEVER just two: upper corridor at hidden row 2, middle corridor at row 4, lower corridor at row 6, all connected by the left vertical spine. At top there are two short single-column upward dead ends at x=4 and x=12. The left spine continues all the way down to row 9. The third corridor has a one-cell downward dead end at its right end x=11, row7. Preserve every route and side pocket in the image.
+Floor-plan map (#=solid laboratory equipment, .=empty walkable floor), positions start at 0:
+###############
+####.#######.##
+#............##
+#.#############
+#.............#
+#.#############
+#...........###
+#.#########.###
+#.#############
+#.#############
+###############
+The hidden cells are NEVER drawn: no grid, no floor tiles, no square-cell borders, no text or labels. Three corridors are continuous pale pearl gray epoxy with subtle reflections, no objects or equipment on them. All dark shape is dense cohesive laboratory scenery: ivory enamel sealed research cabinets, purple glowing cylindrical chambers containing marine or cellular specimens, analyzers, dark charcoal conduits, curved violet utility pipes and aged cream highlights. Every dark region INCLUDING THE BOTTOM HALF must be detailed laboratory environment, not blank black void. Restrict raised equipment to dark regions. No loose props, no characters or robots, no gameplay buttons, crates, doors, gates, holograms or lettering. No greenhouse vines or ordinary foliage. Polished richly inked watercolor style, muted violet lighting, coherent scene-wide light. Preserve the exact position and width of all THREE horizontal routes.

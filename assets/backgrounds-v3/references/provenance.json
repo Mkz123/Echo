@@ -1,0 +1,23 @@
+{
+  "workshop-05": {
+    "key": "workshop-05",
+    "scene": "workshop",
+    "level": 5,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-f8718d88-d0d5-42ce-bb47-f956c2dfb4bb.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-05.png"
+  },
+  "lab-05": {
+    "key": "lab-05",
+    "scene": "lab",
+    "level": 5,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-57bc7cf8-7515-4835-9d94-2206cd948b32.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/lab-05.png"
+  },
+  "bridge-05": {
+    "key": "bridge-05",
+    "scene": "bridge",
+    "level": 5,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-c575d69c-70dc-42c0-acb0-39316dc70978.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/bridge-05.png"
+  }
+}

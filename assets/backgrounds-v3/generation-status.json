@@ -1,0 +1,275 @@
+{
+  "greenhouse-05": {
+    "key": "greenhouse-05",
+    "scene": "greenhouse",
+    "level": 5,
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-05.png",
+    "reusedApprovedPainting": true
+  },
+  "station-05": {
+    "key": "station-05",
+    "scene": "station",
+    "level": 5,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-a4317d02-a3ad-49ce-8890-618a654756e6.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-05.png"
+  },
+  "greenhouse-03": {
+    "key": "greenhouse-03",
+    "scene": "greenhouse",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-03.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-09f415e3-472f-4c45-82c3-64d6c4e524ed.png"
+  },
+  "greenhouse-04": {
+    "key": "greenhouse-04",
+    "scene": "greenhouse",
+    "level": 4,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-6bb90d9a-b146-48a7-ac5c-01c65bb8dd9f.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-04.png"
+  },
+  "greenhouse-06": {
+    "key": "greenhouse-06",
+    "scene": "greenhouse",
+    "level": 6,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-f236b902-3188-40a8-af66-26f976902c9d.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-06.png"
+  },
+  "greenhouse-07": {
+    "key": "greenhouse-07",
+    "scene": "greenhouse",
+    "level": 7,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-66b6f1ff-c895-4a71-8a5f-a0892cf02836.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-07.png"
+  },
+  "greenhouse-08": {
+    "key": "greenhouse-08",
+    "scene": "greenhouse",
+    "level": 8,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-2a77a678-df68-444e-bcb0-46278c9eb9ac.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-08.png"
+  },
+  "greenhouse-09": {
+    "key": "greenhouse-09",
+    "scene": "greenhouse",
+    "level": 9,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-ae0e2292-d4b1-4e33-a594-934a072ea5df.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-09.png"
+  },
+  "greenhouse-10": {
+    "key": "greenhouse-10",
+    "scene": "greenhouse",
+    "level": 10,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-599c2179-a106-41f7-8e56-d20b1717bcf5.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-10.png"
+  },
+  "greenhouse-11": {
+    "key": "greenhouse-11",
+    "scene": "greenhouse",
+    "level": 11,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-921b22a1-245b-4ed1-bb5b-4fd286278a68.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-11.png"
+  },
+  "greenhouse-01": {
+    "key": "greenhouse-01",
+    "scene": "greenhouse",
+    "level": 1,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-f52af727-335d-4ad1-b2f7-773da83a2b2a.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-01.png"
+  },
+  "greenhouse-02": {
+    "key": "greenhouse-02",
+    "scene": "greenhouse",
+    "level": 2,
+    "name": "双人门禁",
+    "width": 9,
+    "height": 6,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/02.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-02.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-357bece7-078a-453a-b813-6ff92b4b7805.png"
+  },
+  "workshop-03": {
+    "key": "workshop-03",
+    "scene": "workshop",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-03.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-bfaa1dd0-a378-45ee-9a4b-147ae076dde5.png"
+  },
+  "workshop-08": {
+    "key": "workshop-08",
+    "scene": "workshop",
+    "level": 8,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-680d511b-745e-459d-ae7a-48a3a1d552ea.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-08.png"
+  },
+  "workshop-11": {
+    "key": "workshop-11",
+    "scene": "workshop",
+    "level": 11,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-fc5796d8-73c8-4510-b327-64e1c25d62db.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-11.png"
+  },
+  "workshop-12": {
+    "key": "workshop-12",
+    "scene": "workshop",
+    "level": 12,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-493b269c-9710-4626-97d3-9f8d849e1a1c.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-12.png"
+  },
+  "workshop-14": {
+    "key": "workshop-14",
+    "scene": "workshop",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-14.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-0171cf83-dfee-429c-ad29-dcde26b111d6.png"
+  },
+  "lab-14": {
+    "key": "lab-14",
+    "scene": "lab",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/lab-14.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-40049fba-5ae6-4717-87f9-328c93910bc8.png"
+  },
+  "station-01": {
+    "key": "station-01",
+    "scene": "station",
+    "level": 1,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-fb8d33db-8e4f-403a-9202-f30c249ac5e0.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-01.png"
+  },
+  "station-02": {
+    "key": "station-02",
+    "scene": "station",
+    "level": 2,
+    "name": "双人门禁",
+    "width": 9,
+    "height": 6,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/02.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-02.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-2238d78f-aae3-4b72-bf06-1ab36bfe50df.png"
+  },
+  "station-03": {
+    "key": "station-03",
+    "scene": "station",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-03.png",
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-d995aadf-7f45-49ce-9098-a4a306d4380d.png"
+  },
+  "station-04": {
+    "key": "station-04",
+    "scene": "station",
+    "level": 4,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-4845cc1c-052b-4b8b-a201-5793b3271db0.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-04.png"
+  },
+  "station-06": {
+    "key": "station-06",
+    "scene": "station",
+    "level": 6,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-b2e8cdb9-b2a1-4bee-a753-893c133b2662.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-06.png"
+  },
+  "station-07": {
+    "key": "station-07",
+    "scene": "station",
+    "level": 7,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-66bf6f2b-cd5b-4914-933f-335fb6646210.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-07.png"
+  },
+  "station-08": {
+    "key": "station-08",
+    "scene": "station",
+    "level": 8,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-b5bb730e-e41e-4324-9fc4-2c2e4ddca3ff.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-08.png"
+  },
+  "station-09": {
+    "key": "station-09",
+    "scene": "station",
+    "level": 9,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-e82b4cd4-6289-47a8-93ba-330fbf071ae2.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-09.png"
+  },
+  "station-10": {
+    "key": "station-10",
+    "scene": "station",
+    "level": 10,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-14cae0a8-9a18-47ff-b175-dfa07f629ec9.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-10.png"
+  },
+  "station-11": {
+    "key": "station-11",
+    "scene": "station",
+    "level": 11,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-9066b367-9b5f-4e7d-90e6-3c8e45fd223f.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-11.png"
+  },
+  "greenhouse-12": {
+    "key": "greenhouse-12",
+    "scene": "greenhouse",
+    "level": 12,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-9564a594-8f41-4595-b4f2-8e7ba6580b07.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-12.png"
+  },
+  "station-12": {
+    "key": "station-12",
+    "scene": "station",
+    "level": 12,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-13cc0961-8d03-4ea6-939c-871ace9dcad2.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-12.png"
+  },
+  "greenhouse-13": {
+    "key": "greenhouse-13",
+    "scene": "greenhouse",
+    "level": 13,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-f8776c23-c8ae-494e-be40-2bfb9fc3b1fb.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-13.png"
+  },
+  "station-13": {
+    "key": "station-13",
+    "scene": "station",
+    "level": 13,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-494d931c-a169-438c-96eb-931200a03cc1.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-13.png"
+  },
+  "greenhouse-14": {
+    "key": "greenhouse-14",
+    "scene": "greenhouse",
+    "level": 14,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-0db3b435-9b6c-4ea9-8d63-5771d6530eda.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-14.png"
+  },
+  "bridge-14": {
+    "key": "bridge-14",
+    "scene": "bridge",
+    "level": 14,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-dfabee81-b083-4798-9647-ed0b9d003a98.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/bridge-14.png"
+  },
+  "station-14": {
+    "key": "station-14",
+    "scene": "station",
+    "level": 14,
+    "source": "/Users/kun/.codex/generated_images/01a14d7c-7a75-7d73-b997-46933809f322/exec-8bc9078f-92cd-461c-b64a-7ec5b384d768.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-14.png"
+  }
+}

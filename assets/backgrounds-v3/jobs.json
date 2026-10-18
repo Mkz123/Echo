@@ -1,0 +1,818 @@
+[
+  {
+    "key": "greenhouse-01",
+    "scene": "greenhouse",
+    "level": 1,
+    "name": "唤醒",
+    "width": 9,
+    "height": 5,
+    "map": [
+      "#########",
+      "#...a####",
+      "#.#######",
+      "#S..A..E#",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/01.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-01.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 1 (唤醒), hidden layout 9 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..4\ny=2: x=1..1\ny=3: x=1..7\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/01.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-01",
+    "scene": "station",
+    "level": 1,
+    "name": "唤醒",
+    "width": 9,
+    "height": 5,
+    "map": [
+      "#########",
+      "#...a####",
+      "#.#######",
+      "#S..A..E#",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/01.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-01.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 1 (唤醒), hidden layout 9 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..4\ny=2: x=1..1\ny=3: x=1..7\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/01.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-02",
+    "scene": "greenhouse",
+    "level": 2,
+    "name": "双人门禁",
+    "width": 9,
+    "height": 6,
+    "map": [
+      "#########",
+      "#S..#...#",
+      "#...A.E.#",
+      "#...#...#",
+      "#a..#####",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/02.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-02.png",
+    "prompt": "Use case: illustration-story. Create one full-canvas orthographic top-down 2D game background in richly detailed ink and watercolor comic style. This ONE input is an exact two-color floor plan, not a mood image. LIGHT CREAM = EMPTY WALKABLE FLOOR. DARK GREEN = SOLID SCENERY. Preserve these TWO silhouettes, the position of EVERY corner and the exact full-canvas proportions. Large cream areas are LARGE EMPTY ROOMS, NEVER hollow rings. Do NOT put any scenic island or object in a light area. Do NOT connect separate light areas across dark strips. Do NOT change shape. Ground has no visible grid or square tiles. Solid masses are connected scenic constructions, never individual grid cells.\nSETTING: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nImportant: The left main room is a broad open rectangle 3 hidden cells wide and 4 tall. The right room is broad and empty 3 hidden cells wide and 3 tall, with a SINGLE-cell-wide horizontal connection in its left wall. Neither room contains a planted island.\nNo characters, robots, doors, buttons, pushable crates, props or text. No lines of hidden cells. Palette green tomato vines with red fruit in DARK regions only, warm terracotta ground in entire LIGHT region, cream pipes and greenhouse glass framing. The entire input silhouette must remain identifiable through the painted background. Work from this blueprint alone; do not reuse any prior image's route.",
+    "referenceImages": [
+      "guides/02.png"
+    ]
+  },
+  {
+    "key": "station-02",
+    "scene": "station",
+    "level": 2,
+    "name": "双人门禁",
+    "width": 9,
+    "height": 6,
+    "map": [
+      "#########",
+      "#S..#...#",
+      "#...A.E.#",
+      "#...#...#",
+      "#a..#####",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/02.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-02.png",
+    "prompt": "Use case: illustration-story. Create one full-canvas orthographic top-down 2D game background in richly detailed ink and watercolor comic style. This ONE input is an exact two-color floor plan, not a mood image. LIGHT CREAM = EMPTY WALKABLE FLOOR. DARK GREEN = SOLID SCENERY. Preserve these TWO silhouettes, the position of EVERY corner and the exact full-canvas proportions. Large cream areas are LARGE EMPTY ROOMS, NEVER hollow rings. Do NOT put any scenic island or object in a light area. Do NOT connect separate light areas across dark strips. Do NOT change shape. Ground has no visible grid or square tiles. Solid masses are connected scenic constructions, never individual grid cells.\nSETTING: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nImportant: The left main room is a broad open rectangle 3 hidden cells wide and 4 tall. The right room is broad and empty 3 hidden cells wide and 3 tall, with a SINGLE-cell-wide horizontal connection in its left wall. Neither room contains a planted island.\nNo characters, robots, doors, buttons, pushable crates, props or text. No lines of hidden cells. Palette: worn ivory and graphite built-in machinery, cold teal and muted amber lighting; cool gray continuous metal floor. No vegetation. Fill ALL dark-green footprint with connected machinery and bulkheads, not void or empty black space, including the large lower-left dark region.\nThe entire input silhouette must remain identifiable through the painted background. Work from this blueprint alone; do not reuse any prior image's route.",
+    "referenceImages": [
+      "guides/02.png"
+    ]
+  },
+  {
+    "key": "greenhouse-03",
+    "scene": "greenhouse",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "map": [
+      "###########",
+      "#S...A..b.#",
+      "#....#....#",
+      "#a...#.####",
+      "######.B.E#",
+      "###########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-03.png",
+    "prompt": "Use case: illustration-story. Create one full-canvas orthographic top-down 2D game background in richly detailed ink and watercolor comic style. This ONE input is an exact two-color floor plan, not a mood image. LIGHT CREAM = EMPTY WALKABLE FLOOR. DARK GREEN = SOLID SCENERY. Preserve these TWO silhouettes, the position of EVERY corner and the exact full-canvas proportions. Large cream areas are LARGE EMPTY ROOMS, NEVER hollow rings. Do NOT put any scenic island or object in a light area. Do NOT connect separate light areas across dark strips. Do NOT change shape. Ground has no visible grid or square tiles. Solid masses are connected scenic constructions, never individual grid cells.\nSETTING: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nImportant: The left main room is a broad open rectangle 4 hidden cells wide and 3 tall. The right room is a broad open rectangle 4 cells wide and 2 tall; its leftmost column continues down into a lower right-hand branch. NO islands in the rooms. Fill these full room interiors with uninterrupted empty ground.\nNo characters, robots, doors, buttons, pushable crates, props or text. No lines of hidden cells. Palette green tomato vines with red fruit in DARK regions only, warm terracotta ground in entire LIGHT region, cream pipes and greenhouse glass framing. The entire input silhouette must remain identifiable through the painted background. Work from this blueprint alone; do not reuse any prior image's route.",
+    "referenceImages": [
+      "guides/03.png"
+    ]
+  },
+  {
+    "key": "workshop-03",
+    "scene": "workshop",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "map": [
+      "###########",
+      "#S...A..b.#",
+      "#....#....#",
+      "#a...#.####",
+      "######.B.E#",
+      "###########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-03.png",
+    "prompt": "Use case: illustration-story. Create one full-canvas orthographic top-down 2D game background in richly detailed ink and watercolor comic style. This ONE input is an exact two-color floor plan, not a mood image. LIGHT CREAM = EMPTY WALKABLE FLOOR. DARK GREEN = SOLID SCENERY. Preserve these TWO silhouettes, the position of EVERY corner and the exact full-canvas proportions. Large cream areas are LARGE EMPTY ROOMS, NEVER hollow rings. Do NOT put any scenic island or object in a light area. Do NOT connect separate light areas across dark strips. Do NOT change shape. Ground has no visible grid or square tiles. Solid masses are connected scenic constructions, never individual grid cells.\nSETTING: Warm amber industrial repair workshop. Dense connected banks of dark steel service machinery, long ochre tool benches, a large lathe or compressor, organized tool walls, copper pipes and coiled hoses, all restricted to blocked regions. Continuous open walkway is worn warm-gray concrete with tiny stains and fine scratches, NO panel grid. Lighting amber overhead, cream enamel fixtures and orange accents. No tomato plants or greenhouse equipment.\nImportant: The left main room is a broad open rectangle 4 hidden cells wide and 3 tall. The right room is a broad open rectangle 4 cells wide and 2 tall; its leftmost column continues down into a lower right-hand branch. NO islands in the rooms. Fill these full room interiors with uninterrupted empty ground.\nNo characters, robots, doors, buttons, pushable crates, props or text. No lines of hidden cells. Palette amber lights, ochre metal machinery in DARK regions only, continuous worn concrete ground in entire LIGHT region. The entire input silhouette must remain identifiable through the painted background. Work from this blueprint alone; do not reuse any prior image's route.",
+    "referenceImages": [
+      "guides/03.png"
+    ]
+  },
+  {
+    "key": "station-03",
+    "scene": "station",
+    "level": 3,
+    "name": "接力",
+    "width": 11,
+    "height": 6,
+    "map": [
+      "###########",
+      "#S...A..b.#",
+      "#....#....#",
+      "#a...#.####",
+      "######.B.E#",
+      "###########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/03.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-03.png",
+    "prompt": "Use case: illustration-story. Create one full-canvas orthographic top-down 2D game background in richly detailed ink and watercolor comic style. This ONE input is an exact two-color floor plan, not a mood image. LIGHT CREAM = EMPTY WALKABLE FLOOR. DARK GREEN = SOLID SCENERY. Preserve these TWO silhouettes, the position of EVERY corner and the exact full-canvas proportions. Large cream areas are LARGE EMPTY ROOMS, NEVER hollow rings. Do NOT put any scenic island or object in a light area. Do NOT connect separate light areas across dark strips. Do NOT change shape. Ground has no visible grid or square tiles. Solid masses are connected scenic constructions, never individual grid cells.\nSETTING: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nImportant: The left main room is a broad open rectangle 4 hidden cells wide and 3 tall. The right room is a broad open rectangle 4 cells wide and 2 tall; its leftmost column continues down into a lower right-hand branch. NO islands in the rooms. Fill these full room interiors with uninterrupted empty ground.\nNo characters, robots, doors, buttons, pushable crates, props or text. No lines of hidden cells. Palette: worn ivory and graphite built-in machinery, cold teal and muted amber lighting; cool gray continuous metal floor. No vegetation. Fill ALL dark-green footprint with connected machinery and bulkheads, not void or empty black space, including the large lower-left dark region.\nThe entire input silhouette must remain identifiable through the painted background. Work from this blueprint alone; do not reuse any prior image's route.",
+    "referenceImages": [
+      "guides/03.png"
+    ]
+  },
+  {
+    "key": "greenhouse-04",
+    "scene": "greenhouse",
+    "level": 4,
+    "name": "培养箱",
+    "width": 10,
+    "height": 5,
+    "map": [
+      "##########",
+      "#S..B.o.a#",
+      "#.#####A##",
+      "#b#####E##",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/04.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-04.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 4 (培养箱), hidden layout 10 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1,7..7\ny=3: x=1..1,7..7\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/04.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-04",
+    "scene": "station",
+    "level": 4,
+    "name": "培养箱",
+    "width": 10,
+    "height": 5,
+    "map": [
+      "##########",
+      "#S..B.o.a#",
+      "#.#####A##",
+      "#b#####E##",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/04.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-04.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 4 (培养箱), hidden layout 10 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1,7..7\ny=3: x=1..1,7..7\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/04.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-05",
+    "scene": "greenhouse",
+    "level": 5,
+    "name": "借来的培养箱",
+    "width": 10,
+    "height": 8,
+    "map": [
+      "##########",
+      "#S.oa.b###",
+      "#.###.####",
+      "#.###C####",
+      "#..A#.BE##",
+      "###.######",
+      "###c######",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/05.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-05.png",
+    "prompt": "Reuse the approved unified greenhouse painting from assets/map-study-v2/greenhouse-05-painting.png; original generation prompts retained in assets/map-study-v2/prompts/.",
+    "referenceImages": [
+      "../map-study-v2/greenhouse-05-painting.png"
+    ]
+  },
+  {
+    "key": "station-05",
+    "scene": "station",
+    "level": 5,
+    "name": "借来的培养箱",
+    "width": 10,
+    "height": 8,
+    "map": [
+      "##########",
+      "#S.oa.b###",
+      "#.###.####",
+      "#.###C####",
+      "#..A#.BE##",
+      "###.######",
+      "###c######",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/05.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-05.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 5 (借来的培养箱), hidden layout 10 columns by 8 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..6\ny=2: x=1..1,5..5\ny=3: x=1..1,5..5\ny=4: x=1..3,5..7\ny=5: x=3..3\ny=6: x=3..3\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/05.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-06",
+    "scene": "greenhouse",
+    "level": 6,
+    "name": "一机两用",
+    "width": 13,
+    "height": 5,
+    "map": [
+      "#############",
+      "#S..A....B.E#",
+      "#.###########",
+      "#...a....b..#",
+      "#############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/06.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-06.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 6 (一机两用), hidden layout 13 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..11\ny=2: x=1..1\ny=3: x=1..11\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/06.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-06",
+    "scene": "station",
+    "level": 6,
+    "name": "一机两用",
+    "width": 13,
+    "height": 5,
+    "map": [
+      "#############",
+      "#S..A....B.E#",
+      "#.###########",
+      "#...a....b..#",
+      "#############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/06.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-06.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 6 (一机两用), hidden layout 13 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..11\ny=2: x=1..1\ny=3: x=1..11\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/06.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-07",
+    "scene": "greenhouse",
+    "level": 7,
+    "name": "过载电闸",
+    "width": 10,
+    "height": 6,
+    "map": [
+      "##########",
+      "#S....A.E#",
+      "#.########",
+      "#.########",
+      "#x########",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/07.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-07.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 7 (过载电闸), hidden layout 10 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1\ny=3: x=1..1\ny=4: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/07.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-07",
+    "scene": "station",
+    "level": 7,
+    "name": "过载电闸",
+    "width": 10,
+    "height": 6,
+    "map": [
+      "##########",
+      "#S....A.E#",
+      "#.########",
+      "#.########",
+      "#x########",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/07.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-07.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 7 (过载电闸), hidden layout 10 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1\ny=3: x=1..1\ny=4: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/07.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-08",
+    "scene": "greenhouse",
+    "level": 8,
+    "name": "三秒",
+    "width": 15,
+    "height": 5,
+    "map": [
+      "###############",
+      "#x...S..A.B.CE#",
+      "#.#######.#####",
+      "#c#######b#####",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/08.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-08.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 8 (三秒), hidden layout 15 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..13\ny=2: x=1..1,9..9\ny=3: x=1..1,9..9\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/08.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "workshop-08",
+    "scene": "workshop",
+    "level": 8,
+    "name": "三秒",
+    "width": 15,
+    "height": 5,
+    "map": [
+      "###############",
+      "#x...S..A.B.CE#",
+      "#.#######.#####",
+      "#c#######b#####",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/08.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-08.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm amber industrial repair workshop. Dense connected banks of dark steel service machinery, long ochre tool benches, a large lathe or compressor, organized tool walls, copper pipes and coiled hoses, all restricted to blocked regions. Continuous open walkway is worn warm-gray concrete with tiny stains and fine scratches, NO panel grid. Lighting amber overhead, cream enamel fixtures and orange accents. No tomato plants or greenhouse equipment.\nLEVEL 8 (三秒), hidden layout 15 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..13\ny=2: x=1..1,9..9\ny=3: x=1..1,9..9\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is workshop, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/08.png",
+      "references/workshop-05.png"
+    ]
+  },
+  {
+    "key": "station-08",
+    "scene": "station",
+    "level": 8,
+    "name": "三秒",
+    "width": 15,
+    "height": 5,
+    "map": [
+      "###############",
+      "#x...S..A.B.CE#",
+      "#.#######.#####",
+      "#c#######b#####",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/08.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-08.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 8 (三秒), hidden layout 15 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..13\ny=2: x=1..1,9..9\ny=3: x=1..1,9..9\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/08.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-09",
+    "scene": "greenhouse",
+    "level": 9,
+    "name": "单人闸机",
+    "width": 10,
+    "height": 6,
+    "map": [
+      "##########",
+      "#S.G..B.E#",
+      "#.###b####",
+      "#.###.####",
+      "#.....####",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/09.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-09.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 9 (单人闸机), hidden layout 10 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1,5..5\ny=3: x=1..1,5..5\ny=4: x=1..5\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/09.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-09",
+    "scene": "station",
+    "level": 9,
+    "name": "单人闸机",
+    "width": 10,
+    "height": 6,
+    "map": [
+      "##########",
+      "#S.G..B.E#",
+      "#.###b####",
+      "#.###.####",
+      "#.....####",
+      "##########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/09.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-09.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 9 (单人闸机), hidden layout 10 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1,5..5\ny=3: x=1..1,5..5\ny=4: x=1..5\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/09.png",
+      "../map-study-v1/atlases/station.png"
+    ]
+  },
+  {
+    "key": "greenhouse-10",
+    "scene": "greenhouse",
+    "level": 10,
+    "name": "撤离名单",
+    "width": 12,
+    "height": 5,
+    "map": [
+      "############",
+      "#EB.......b#",
+      "###G######G#",
+      "#S.........#",
+      "############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/10.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-10.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 10 (撤离名单), hidden layout 12 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..10\ny=2: x=3..3,10..10\ny=3: x=1..10\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/10.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-10",
+    "scene": "station",
+    "level": 10,
+    "name": "撤离名单",
+    "width": 12,
+    "height": 5,
+    "map": [
+      "############",
+      "#EB.......b#",
+      "###G######G#",
+      "#S.........#",
+      "############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/10.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-10.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 10 (撤离名单), hidden layout 12 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..10\ny=2: x=3..3,10..10\ny=3: x=1..10\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/10.png",
+      "paintings/station-05.png"
+    ]
+  },
+  {
+    "key": "greenhouse-11",
+    "scene": "greenhouse",
+    "level": 11,
+    "name": "卡带",
+    "width": 13,
+    "height": 6,
+    "map": [
+      "#############",
+      "#S...1..b####",
+      "#.###########",
+      "#...A...B.E.#",
+      "#a###########",
+      "#############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/11.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-11.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 11 (卡带), hidden layout 13 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1\ny=3: x=1..11\ny=4: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/11.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "workshop-11",
+    "scene": "workshop",
+    "level": 11,
+    "name": "卡带",
+    "width": 13,
+    "height": 6,
+    "map": [
+      "#############",
+      "#S...1..b####",
+      "#.###########",
+      "#...A...B.E.#",
+      "#a###########",
+      "#############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/11.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-11.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm amber industrial repair workshop. Dense connected banks of dark steel service machinery, long ochre tool benches, a large lathe or compressor, organized tool walls, copper pipes and coiled hoses, all restricted to blocked regions. Continuous open walkway is worn warm-gray concrete with tiny stains and fine scratches, NO panel grid. Lighting amber overhead, cream enamel fixtures and orange accents. No tomato plants or greenhouse equipment.\nLEVEL 11 (卡带), hidden layout 13 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1\ny=3: x=1..11\ny=4: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is workshop, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/11.png",
+      "references/workshop-05.png"
+    ]
+  },
+  {
+    "key": "station-11",
+    "scene": "station",
+    "level": 11,
+    "name": "卡带",
+    "width": 13,
+    "height": 6,
+    "map": [
+      "#############",
+      "#S...1..b####",
+      "#.###########",
+      "#...A...B.E.#",
+      "#a###########",
+      "#############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/11.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-11.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 11 (卡带), hidden layout 13 columns by 6 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..8\ny=2: x=1..1\ny=3: x=1..11\ny=4: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/11.png",
+      "paintings/station-05.png"
+    ]
+  },
+  {
+    "key": "greenhouse-12",
+    "scene": "greenhouse",
+    "level": 12,
+    "name": "三卷磁带",
+    "width": 14,
+    "height": 7,
+    "map": [
+      "##############",
+      "#S..A..B..C.E#",
+      "#.############",
+      "#.a..2....c###",
+      "#.############",
+      "#b############",
+      "##############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/12.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-12.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 12 (三卷磁带), hidden layout 14 columns by 7 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..12\ny=2: x=1..1\ny=3: x=1..10\ny=4: x=1..1\ny=5: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/12.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "workshop-12",
+    "scene": "workshop",
+    "level": 12,
+    "name": "三卷磁带",
+    "width": 14,
+    "height": 7,
+    "map": [
+      "##############",
+      "#S..A..B..C.E#",
+      "#.############",
+      "#.a..2....c###",
+      "#.############",
+      "#b############",
+      "##############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/12.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-12.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm amber industrial repair workshop. Dense connected banks of dark steel service machinery, long ochre tool benches, a large lathe or compressor, organized tool walls, copper pipes and coiled hoses, all restricted to blocked regions. Continuous open walkway is worn warm-gray concrete with tiny stains and fine scratches, NO panel grid. Lighting amber overhead, cream enamel fixtures and orange accents. No tomato plants or greenhouse equipment.\nLEVEL 12 (三卷磁带), hidden layout 14 columns by 7 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..12\ny=2: x=1..1\ny=3: x=1..10\ny=4: x=1..1\ny=5: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is workshop, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/12.png",
+      "references/workshop-05.png"
+    ]
+  },
+  {
+    "key": "station-12",
+    "scene": "station",
+    "level": 12,
+    "name": "三卷磁带",
+    "width": 14,
+    "height": 7,
+    "map": [
+      "##############",
+      "#S..A..B..C.E#",
+      "#.############",
+      "#.a..2....c###",
+      "#.############",
+      "#b############",
+      "##############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/12.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-12.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 12 (三卷磁带), hidden layout 14 columns by 7 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..12\ny=2: x=1..1\ny=3: x=1..10\ny=4: x=1..1\ny=5: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/12.png",
+      "paintings/station-05.png"
+    ]
+  },
+  {
+    "key": "greenhouse-13",
+    "scene": "greenhouse",
+    "level": 13,
+    "name": "门那边的人",
+    "width": 9,
+    "height": 5,
+    "map": [
+      "#########",
+      "#S...A.E#",
+      "#.#######",
+      "#a#######",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/13.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-13.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 13 (门那边的人), hidden layout 9 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..7\ny=2: x=1..1\ny=3: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/13.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "station-13",
+    "scene": "station",
+    "level": 13,
+    "name": "门那边的人",
+    "width": 9,
+    "height": 5,
+    "map": [
+      "#########",
+      "#S...A.E#",
+      "#.#######",
+      "#a#######",
+      "#########"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/13.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-13.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 13 (门那边的人), hidden layout 9 columns by 5 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=1..7\ny=2: x=1..1\ny=3: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/13.png",
+      "paintings/station-05.png"
+    ]
+  },
+  {
+    "key": "greenhouse-14",
+    "scene": "greenhouse",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "map": [
+      "###############",
+      "####d#######y##",
+      "#............##",
+      "#.#############",
+      "#S.A.4.D.B.C.E#",
+      "#.#############",
+      "#.....G.....###",
+      "#1#########c###",
+      "#o#############",
+      "#a#############",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/greenhouse-14.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Warm, thriving tomato cultivation greenhouse: lush natural connected tomato trellises with red and green tomatoes, long cream-and-green hydroponic pipes, a few round water tanks, copper irrigation fittings, curved glass greenhouse framing and warm sunlight. Impassable areas form LARGE connected planting beds, not square planters. Clear path is uninterrupted warm terracotta/earth with subtle soil texture. No paving grid.\nLEVEL 14 (所有的磁带), hidden layout 15 columns by 11 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=4..4,12..12\ny=2: x=1..12\ny=3: x=1..1\ny=4: x=1..13\ny=5: x=1..1\ny=6: x=1..11\ny=7: x=1..1,11..11\ny=8: x=1..1\ny=9: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.",
+    "referenceImages": [
+      "guides/14.png",
+      "paintings/greenhouse-05.png"
+    ]
+  },
+  {
+    "key": "workshop-14",
+    "scene": "workshop",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "map": [
+      "###############",
+      "####d#######y##",
+      "#............##",
+      "#.#############",
+      "#S.A.4.D.B.C.E#",
+      "#.#############",
+      "#.....G.....###",
+      "#1#########c###",
+      "#o#############",
+      "#a#############",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/workshop-14.png",
+    "prompt": "Use case: illustration-story. One continuous hand-inked watercolor comic illustration for a top-down 2D game environment. Strict orthographic overhead camera. Fill the entire rectangular canvas, exact ratio 15:11. The ONE input image is the full exact floor plan, light cream = clear continuous floor, dark green = built-in solid repair workshop equipment and specimen cabinets. Follow this plan literally. Do not crop, reframe or invent a different room.\nCRITICAL: this layout has THREE separate long horizontal corridors, NEVER just two: upper corridor at hidden row 2, middle corridor at row 4, lower corridor at row 6, all connected by the left vertical spine. At top there are two short single-column upward dead ends at x=4 and x=12. The left spine continues all the way down to row 9. The third corridor has a one-cell downward dead end at its right end x=11, row7. Preserve every route and side pocket in the image.\nFloor-plan map (#=solid repair workshop equipment, .=empty walkable floor), positions start at 0:\n###############\n####.#######.##\n#............##\n#.#############\n#.............#\n#.#############\n#...........###\n#.#########.###\n#.#############\n#.#############\n###############\nThe hidden cells are NEVER drawn: no grid, no floor tiles, no square-cell borders, no text or labels. Three corridors are continuous warm gray worn concrete with subtle reflections, no objects or equipment on them. All dark shape is dense cohesive repair workshop scenery: cream enamel service machinery, large lathes, integrated ochre workbenches, tool racks, dark charcoal conduits, curved copper pipes and aged cream highlights. Every dark region INCLUDING THE BOTTOM HALF must be detailed repair workshop environment, not blank black void. Restrict raised equipment to dark regions. No loose props, no characters or robots, no gameplay buttons, crates, doors, gates, holograms or lettering. No greenhouse vines, laboratory glass chambers or violet lights. Polished richly inked watercolor style, warm amber lighting, coherent scene-wide light. Preserve the exact position and width of all THREE horizontal routes.",
+    "referenceImages": [
+      "guides/14.png"
+    ]
+  },
+  {
+    "key": "lab-14",
+    "scene": "lab",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "map": [
+      "###############",
+      "####d#######y##",
+      "#............##",
+      "#.#############",
+      "#S.A.4.D.B.C.E#",
+      "#.#############",
+      "#.....G.....###",
+      "#1#########c###",
+      "#o#############",
+      "#a#############",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/lab-14.png",
+    "prompt": "Use case: illustration-story. One continuous hand-inked watercolor comic illustration for a top-down 2D game environment. Strict orthographic overhead camera. Fill the entire rectangular canvas, exact ratio 15:11. The ONE input image is the full exact floor plan, light cream = clear continuous floor, dark green = built-in solid laboratory equipment and specimen cabinets. Follow this plan literally. Do not crop, reframe or invent a different room.\nCRITICAL: this layout has THREE separate long horizontal corridors, NEVER just two: upper corridor at hidden row 2, middle corridor at row 4, lower corridor at row 6, all connected by the left vertical spine. At top there are two short single-column upward dead ends at x=4 and x=12. The left spine continues all the way down to row 9. The third corridor has a one-cell downward dead end at its right end x=11, row7. Preserve every route and side pocket in the image.\nFloor-plan map (#=solid laboratory equipment, .=empty walkable floor), positions start at 0:\n###############\n####.#######.##\n#............##\n#.#############\n#.............#\n#.#############\n#...........###\n#.#########.###\n#.#############\n#.#############\n###############\nThe hidden cells are NEVER drawn: no grid, no floor tiles, no square-cell borders, no text or labels. Three corridors are continuous pale pearl gray epoxy with subtle reflections, no objects or equipment on them. All dark shape is dense cohesive laboratory scenery: ivory enamel sealed research cabinets, purple glowing cylindrical chambers containing marine or cellular specimens, analyzers, dark charcoal conduits, curved violet utility pipes and aged cream highlights. Every dark region INCLUDING THE BOTTOM HALF must be detailed laboratory environment, not blank black void. Restrict raised equipment to dark regions. No loose props, no characters or robots, no gameplay buttons, crates, doors, gates, holograms or lettering. No greenhouse vines or ordinary foliage. Polished richly inked watercolor style, muted violet lighting, coherent scene-wide light. Preserve the exact position and width of all THREE horizontal routes.",
+    "referenceImages": [
+      "guides/14.png"
+    ]
+  },
+  {
+    "key": "bridge-14",
+    "scene": "bridge",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "map": [
+      "###############",
+      "####d#######y##",
+      "#............##",
+      "#.#############",
+      "#S.A.4.D.B.C.E#",
+      "#.#############",
+      "#.....G.....###",
+      "#1#########c###",
+      "#o#############",
+      "#a#############",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/bridge-14.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cyan and navy spacecraft boarding bridge. Coherent broad spacecraft interior with large docking-window structures along blocked perimeter, rail equipment, integrated luggage STORAGE cabinets, docking machinery and continuous cyan-lit piping inside blocked masses. Beyond perimeter glass is dark space and the hull of a docked ship. Empty walkable route is one uninterrupted blue-gray anti-slip deck with faint longitudinal wear, NO square panels or grid. Cyan-blue ambient light, cream fixtures, restrained amber lamps. No people, suitcases on path or ticket gates.\nLEVEL 14 (所有的磁带), hidden layout 15 columns by 11 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=4..4,12..12\ny=2: x=1..12\ny=3: x=1..1\ny=4: x=1..13\ny=5: x=1..1\ny=6: x=1..11\ny=7: x=1..1,11..11\ny=8: x=1..1\ny=9: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is bridge, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/14.png",
+      "references/bridge-05.png"
+    ]
+  },
+  {
+    "key": "station-14",
+    "scene": "station",
+    "level": 14,
+    "name": "所有的磁带",
+    "width": 15,
+    "height": 11,
+    "map": [
+      "###############",
+      "####d#######y##",
+      "#............##",
+      "#.#############",
+      "#S.A.4.D.B.C.E#",
+      "#.#############",
+      "#.....G.....###",
+      "#1#########c###",
+      "#o#############",
+      "#a#############",
+      "###############"
+    ],
+    "guide": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/guides/14.png",
+    "output": "/Users/kun/Documents/droid/echo/assets/backgrounds-v3/paintings/station-14.png",
+    "prompt": "Use case: illustration-story / production 2D game background.\nCreate ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved hand-inked full-scene art direction. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.\nINPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is a scene-specific material/style reference. If it is an asset atlas, borrow its materials and ink rendering ONLY: do not copy its cells, objects, robot or grid. Build one complete environment that follows image 1. Input 3, if present, is only a theme/material reference and NOT a layout.\nThe walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.\nNo characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.\n\nSCENE: Cold abandoned space station, present day. Worn cream and graphite bulkheads, dense connected broken equipment banks, dead consoles, bundled electrical conduits, old sealed containers and oxidized pipe systems in solid blocked masses. The walkable corridor is continuous scuffed cold gray metal, fine wear but NO visible square tiling and NO rubble, holes, wires or wreckage on the walkable route. Lonely teal emergency light, sparse muted amber fixtures, melancholy post-apocalyptic atmosphere. No people or holograms.\nLEVEL 14 (所有的磁带), hidden layout 15 columns by 11 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:\ny=1: x=4..4,12..12\ny=2: x=1..12\ny=3: x=1..1\ny=4: x=1..13\ny=5: x=1..1\ny=6: x=1..11\ny=7: x=1..1,11..11\ny=8: x=1..1\ny=9: x=1..1\nAll other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.\nABSOLUTE ENVIRONMENT EXCLUSION: no foliage, no vines, no tomatoes, no flowers, no garden beds, no greenhouse domes, no vegetation, no round botanical reservoirs. The setting is station, never a repainted greenhouse. Populate solid regions with this scene's appropriate built-in machinery and architectural masses only.",
+    "referenceImages": [
+      "guides/14.png",
+      "paintings/station-05.png"
+    ]
+  }
+]

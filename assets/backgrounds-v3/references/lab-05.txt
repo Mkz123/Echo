@@ -1,0 +1,15 @@
+Use case: illustration-story / production 2D game background.
+Create ONE complete, coherent hand-painted comic environment background, edge to edge, not a sprite atlas or a tilemap. Preserve the polished ink-and-watercolor rendering, rich organic environmental detail, subtle hatching, coherent scene-wide light, aged cream highlights and expressive contours of the approved full greenhouse reference. Camera is STRAIGHT-DOWN ORTHOGRAPHIC. No horizon, no vanishing points, no isometric camera. No collage, no repeated square stamps, no floor checkerboard, no visible gameplay grid.
+INPUT ROLES: image 1 is the authoritative layout blueprint. Its pale shape is the entire walkable route; dark shape is solid non-walkable environment. Preserve the FULL CANVAS MAPPING and its exact aspect ratio, route widths, branches, corners and dead ends. Do not add floor pockets in dark areas. Do not crop, pad, rotate, mirror, change proportions, or reframe the blueprint. Input 2 is the canonical scene illustration for STYLE, palette, materials and environmental identity; use the layout from image 1 when the composition differs. Input 3, if present, is only a theme/material reference and NOT a layout.
+The walkable route must be completely clear ground, including all future prop positions. Large connected scenic masses should follow the dark footprint naturally; do not reveal the invisible grid by dividing every dark square into a planter or cabinet. Enclose connected regions as coherent beds / machinery installations. Keep raised structure, vegetation, tanks, pipes and equipment on the blocked side of the outline; do not narrow the path.
+No characters, robots, holograms, buttons, mushrooms, sunflowers, pushable crates, loose luggage, doors, turnstiles, interactive props, UI, lettering, symbols, numbers or labels. These are separate game layers. Door cells in the blueprint are ordinary clear floor for this background.
+
+SCENE: Cool violet and ivory research laboratory. Large continuous sealed specimen cabinets, broad glass sample chambers, white enameled analyzers and curved purple-lit utility pipes, all inside blocked masses. Continuous walkable epoxy floor is pale pearl gray with faint wear and subtle reflections, NO square tile grid. Muted lavender light, dark charcoal ink, warm aged-cream highlights consistent with the approved comic. No plants on paths, no greenhouse or mechanic tools.
+LEVEL 5 (借来的培养箱), hidden layout 10 columns by 8 rows. Each hidden cell occupies x/width..(x+1)/width and y/height..(y+1)/height of the FULL image. Ground only in these zero-based inclusive row runs:
+y=1: x=1..6
+y=2: x=1..1,5..5
+y=3: x=1..1,5..5
+y=4: x=1..3,5..7
+y=5: x=3..3
+y=6: x=3..3
+All other parts are blocked scenic masses. The hidden cell indices are constraints only: do NOT draw their lines or numbers. Produce one beautiful unified room with a continuous natural walkway and a strong sense of place.
