@@ -725,19 +725,19 @@ function finishRewind() {
 }// ================= Story & tutorial =================
 // Chapter numbers come from the order here, so inserting a chapter renumbers the rest.
 const CHAPTERS = [
-  { id: 'prologue', title: '序章', name: '维修舱' },
-  { id: 'yard', name: '温室', env: ['番茄架还在，番茄早就没了。'], signal: [12, '……开……门……'] },
-  { id: 'exam', name: '实验室', env: ['白板上还留着一道没算完的题。'], signal: [31, '……47……开门……'] },
-  { id: 'station', name: '登舰廊桥', env: ['闸机上方的屏幕还亮着：撤离已完成。'], signal: [58, '……47，开门……我……'] },
-  { id: 'rain', name: '受损舱段', env: ['这里漏过气。', '墙上有一道很长的划痕。'], signal: [83, '……47，开门。我回来……'] },
-  { id: 'finale', title: '终章', name: '核心舱', env: ['信号就在前面。'], signal: [100, '47，开门。我回来接你了。'] },
-  { id: 'epilogue', title: '尾声', name: '维修舱', env: ['核心舱里没有人。', '只有一台投影仪，和一卷标着「47」的磁带。'], log: '投影坐标：维修舱' },
+  { id: 'prologue', title: '序章' },
+  { id: 'yard', env: ['番茄架还在，番茄早就没了。'], signal: [12, '……开……门……'] },
+  { id: 'exam', env: ['白板上还留着一道没算完的题。'], signal: [31, '……47……开门……'] },
+  { id: 'station', env: ['闸机上方的屏幕还亮着：撤离已完成。'], signal: [58, '……47，开门……我……'] },
+  { id: 'rain', env: ['这里漏过气。', '墙上有一道很长的划痕。'], signal: [83, '……47，开门。我回来……'] },
+  { id: 'finale', title: '终章', env: ['信号就在前面。'], signal: [100, '47，开门。我回来接你了。'] },
+  { id: 'epilogue', title: '尾声', env: ['核心舱里没有人。', '只有一台投影仪，和一卷标着「47」的磁带。'], log: '投影坐标：维修舱' },
 ];
 const CN_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
 function chapterIndex(id) { return CHAPTERS.findIndex(c => c.id === id); }
 function chapterShort(id) {
   const i = chapterIndex(id);
-  return i <= 0 ? `${CHAPTERS[0].title} · ${CHAPTERS[0].name}` : `${CHAPTERS[i].title || '第' + CN_NUM[i] + '章'} · ${CHAPTERS[i].name}`;
+  return i <= 0 ? CHAPTERS[0].title : CHAPTERS[i].title || '第' + CN_NUM[i] + '章';
 }
 const chapterTitle = chapterShort;
 function levelLabel(li) {
