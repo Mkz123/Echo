@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>回声 · ECHO</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #07090f; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<script>
+// CORE-START
+const LEVELS = [
+  {
+    ch: 'prologue', name: '梦的入口', T: 24, selves: 2, tutorial: true,
+    intro: '墙上写着：这里的门，一个人打不开。',
+    hint: '这里的门，一个人打不开。',
+    map: [
+      '#########',
+      '#...a####',
+      '#.#######',
+      '#S..A..E#',
+      '#########',
+    ],
+  },
+  {
+    ch: 'yard', name: '留下来的人', T: 12, selves: 2,
+    hint: '这一次没有引导了。记住：时间用完或按 Enter，刚才的你会留下来，替你守住按钮。',
+    map: [
+      '#########',
+      '#S..#...#',
+      '#...A.E.#',
+      '#...#...#',
+      '#a..#####',
+      '#########',
+    ],
+  },
+  {
+    ch: 'yard', name: '接力', T: 12, selves: 3,
+    hint: '每个过去的你都会一模一样地重复自己的动作。让他们一个接一个，为后来的你开路。',
+    map: [
+      '###########',
+      '#S...A..b.#',
+      '#....#....#',
+      '#a...#.####',
+      '######.B.E#',
+      '###########',
+    ],
+  },
+  {
+    ch: 'yard', name: '外婆的木箱', T: 12, selves: 2,
+    hint: '木箱可以推。把它推到按钮上，它会一直替你压着。',
+    map: [
+      '##########',
+      '#S..B.o.a#',
+      '#.#####A##',
+      '#b#####E##',
+      '##########',
+    ],
+  },
+  {
+    ch: 'yard', name: '借来的箱子', T: 18, selves: 2,
+    hint: '过去的你要用这个箱子打开远处的门。等他走过去，你再把箱子借走。',
+    map: [
+      '##########',
+      '#S.oa.b###',
+      '#.###.####',
+      '#.###C####',
+      '#..A#.BE##',
+      '###.######',
+      '###c######',
+      '##########',
+    ],
+  },
+  {
+    ch: 'exam', name: '一人分饰两角', T: 14, selves: 2,
+    hint: '这一关只能有两个你。过去的你得先帮你开第一扇门，再赶去开第二扇。按空格原地等待，掐准时间。',
+    map: [
+      '#############',
+      '#S..A....B.E#',
+      '#.###########',
+      '#...a....b..#',
+      '#############',
+    ],
+  },
+  {
+    ch: 'exam', name: '闹钟', T: 12, selves: 2, timer: 3,
+    hint: '圆形的是闹钟按钮：踩上去的那一刻，同色的门会开 3 步，然后自己关上。站着不动，它不会一直响。',
+    map: [
+      '##########',
+      '#S....A.E#',
+      '#.########',
+      '#.########',
+      '#x########',
+      '##########',
+    ],
+  },
+  {
+    ch: 'exam', name: '交卷铃', T: 14, selves: 3, timer: 3,
+    hint: '铃只响 3 步。按铃的你还有别的事要做，另外两个你得在铃声里一起穿过那扇门。',
+    map: [
+      '###############',
+      '#x...S..A.B.CE#',
+      '#.#######.#####',
+      '#c#######b#####',
+      '###############',
+    ],
+  },
+  {
+    ch: 'station', name: '检票口', T: 14, selves: 2,
+    hint: '黄色的是检票口：每一轮，一张票只放一个人过去。票被过去的你用掉了，你就得另找一条路。',
+    map: [
+      '##########',
+      '#S.G..B.E#',
+      '#.###b####',
+      '#.###.####',
+      '#.....####',
+      '##########',
+    ],
+  },
+  {
+    ch: 'station', name: '两张车票', T: 14, selves: 2,
+    hint: '两个检票口，一个近，一个远。近的那张票，该留给谁？',
+    map: [
+      '############',
+      '#EB.......b#',
+      '###G######G#',
+      '#S.........#',
+      '############',
+    ],
+  },
+  {
+    ch: 'rain', name: '别害了过去的自己', T: 14, selves: 3,
+    hint: '带斜纹的门正好相反：同色按钮被踩下时，它会关上。如果那一刻有个过去的你正站在门里……',
+    map: [
+      '#############',
+      '#S...1..b####',
+      '#.###########',
+      '#...A...B.E.#',
+      '#a###########',
+      '#############',
+    ],
+  },
+  {
+    ch: 'rain', name: '三重奏', T: 16, selves: 3,
+    hint: '三个你，三扇门，一道斜纹门。谁先走、谁等谁、谁要身兼两职，想清楚再动。',
+    map: [
+      '##############',
+      '#S..A..B..C.E#',
+      '#.############',
+      '#.a..2....c###',
+      '#.############',
+      '#b############',
+      '##############',
+    ],
+  },
+  {
+    ch: 'finale', name: '有人在等', T: 10, selves: 2,
+    intro: '门的另一边，好像也有一个人。',
+    hint: '金色的「?」是门另一边的人。他会自己往前走，被关着的门挡住就停下来等。帮他走到你出发的地方，出口才会亮。',
+    future: ['LLLLLL'],
+    map: [
+      '#########',
+      '#S...A.E#',
+      '#.#######',
+      '#a#######',
+      '#########',
+    ],
+  },
+  {
+    ch: 'finale', name: '所有的你', T: 26, selves: 5, finale: true,
+    intro: '最后一次了。',
+    hint: '五个你，各守一处：木箱、闹钟、检票口后的按钮，还有琥珀色的那对门（先按住，再放手）。他还在门的另一边等。',
+    future: ['LLLLLLLLLLLL'],
+    map: [
+      '###############',
+      '####d#######y##',
+      '#............##',
+      '#.#############',
+      '#S.A.4.D.B.C.E#',
+      '#.#############',
+      '#.....G.....###',
+      '#1#########c###',
+      '#o#############',
+      '#a#############',
+      '###############',
+    ],
+  },
+  {
+    ch: 'epilogue', name: '差一步', T: 24, selves: 1, lastStand: true,
+    intro: '这一次，没有别的你了。',
+    hint: '这一次，没有别的你了。',
+    future: ['L'.repeat(18)],
+    map: [
+      '#####################',
+      '#S....AAA..........E#',
+      '#####a###############',
+      '#####################',
+    ],
+  },
+];
+
+const DIRS = { U: [0, -1], D: [0, 1], L: [-1, 0], R: [1, 0], W: [0, 0] };
+const WALL_CELL = { wall: true, plate: -1, door: -1, inv: false, exit: false, gate: -1 };
+
+function parseLevel(def) {
+  const rows = def.map, h = rows.length, w = rows[0].length;
+  const cells = [], doors = [], plates = [], boxes = [], timedPlates = [], gates = [];
+  let start = null, exit = null;
+  for (let y = 0; y < h; y++) {
+    const row = [];
+    for (let x = 0; x < w; x++) {
+      const ch = rows[y][x] || '#';
+      const c = { wall: false, plate: -1, door: -1, inv: false, exit: false, gate: -1 };
+      if (ch === '#') c.wall = true;
+      else if (ch === 'S') start = [x, y];
+      else if (ch === 'E') { c.exit = true; exit = [x, y]; }
+      else if ('abcd'.includes(ch)) { c.plate = 'abcd'.indexOf(ch); plates.push([x, y]); }
+      else if ('ABCD'.includes(ch)) { c.door = 'ABCD'.indexOf(ch); doors.push([x, y]); }
+      else if ('1234'.includes(ch)) { c.door = '1234'.indexOf(ch); c.inv = true; doors.push([x, y]); }
+      else if (ch === 'o') boxes.push([x, y]);
+      else if (ch === 'G') { c.gate = gates.length; gates.push([x, y]); }
+      else if ('xyzw'.includes(ch)) { c.plate = 'xyzw'.indexOf(ch); c.timed = true; plates.push([x, y]); timedPlates.push([x, y]); }
+      row.push(c);
+    }
+    cells.push(row);
+  }
+  const future = (def.future || []).map(moves => {
+    const route = [exit.slice()];
+    for (const m of moves) { const p = route[route.length - 1], d = DIRS[m]; route.push([p[0] + d[0], p[1] + d[1]]); }
+    return route;
+  });
+  return { name: def.name, ch: def.ch, intro: def.intro, tutorial: !!def.tutorial, finale: !!def.finale, lastStand: !!def.lastStand, hint: def.hint, T: def.T, selves: def.selves, timer: def.timer || 3, w, h, cells, start, exit, doors, plates, boxes, timedPlates, gates, future };
+}
+function futureArrived(L, s) { return L.future.every((r, j) => s.falive[j] && s.fidx[j] === r.length - 1); }
+function lastDoorIndex(L, route) { return route.reduce((m, p, i) => (cellAt(L, p[0], p[1]).door >= 0 ? i : m), -1); }
+
+function cellAt(L, x, y) {
+  if (y < 0 || y >= L.h || x < 0 || x >= L.w) return WALL_CELL;
+  return L.cells[y][x];
+}
+function doorOpen(c, pressed) { return c.inv ? !pressed[c.door] : pressed[c.door]; }
+function posAt(path, t) { return path[Math.min(t, path.length - 1)]; }
+
+function boxIndex(boxes, x, y) {
+  for (let i = 0; i < boxes.length; i++) if (boxes[i][0] === x && boxes[i][1] === y) return i;
+  return -1;
+}
+function boxCanEnter(L, boxes, x, y, occupied) {
+  const c = cellAt(L, x, y);
+  if (c.wall || c.door >= 0 || c.exit || c.gate >= 0) return false;
+  if (boxIndex(boxes, x, y) >= 0) return false;
+  return !occupied.some(p => p[0] === x && p[1] === y);
+}
+
+// A ghost standing in a door that is closed at tick t is a paradox: it is erased,
+// which releases its plates and can cascade into further paradoxes.
+// `pressed[k]` means colour k is active: a hold plate is occupied or its timer is running.
+function settle(L, ghosts, gpos, alive, boxes, pp, t, events, timer) {
+  const hold = (x, y) => { const c = cellAt(L, x, y); return c.plate >= 0 && !c.timed ? c.plate : -1; };
+  let pressed;
+  for (;;) {
+    pressed = timer.map(v => v > 0);
+    for (let i = 0; i < ghosts.length; i++) {
+      if (!alive[i]) continue;
+      const k = hold(gpos[i][0], gpos[i][1]);
+      if (k >= 0) pressed[k] = true;
+    }
+    const pk = hold(pp[0], pp[1]);
+    if (pk >= 0) pressed[pk] = true;
+    for (const b of boxes) {
+      const k = hold(b[0], b[1]);
+      if (k >= 0) pressed[k] = true;
+    }
+    let changed = false;
+    for (let i = 0; i < ghosts.length; i++) {
+      if (!alive[i]) continue;
+      const c = cellAt(L, gpos[i][0], gpos[i][1]);
+      if (c.door >= 0 && !doorOpen(c, pressed)) {
+        alive[i] = false;
+        events.push({ ghost: i, t, pos: gpos[i], kind: 'door' });
+        changed = true;
+      }
+    }
+    if (!changed) break;
+  }
+  return pressed;
+}
+
+function timedOccupancy(L, gpos, alive, boxes, pp) {
+  return L.timedPlates.map(([x, y]) =>
+    (pp[0] === x && pp[1] === y) ||
+    gpos.some((p, i) => alive[i] && p[0] === x && p[1] === y) ||
+    boxIndex(boxes, x, y) >= 0);
+}
+
+function initialState(L, ghosts, pp) {
+  const boxes = L.boxes.map(b => b.slice());
+  const alive = ghosts.map(() => true);
+  const gpos = ghosts.map(g => posAt(g, 0));
+  const events = [];
+  const tocc = timedOccupancy(L, gpos, alive, boxes, pp);
+  const timer = [0, 0, 0, 0];
+  const pressed = settle(L, ghosts, gpos, alive, boxes, pp, 0, events, timer);
+  const gateUse = L.gates.map(() => null);
+  const fidx = L.future.map(() => 0), falive = L.future.map(() => true);
+  return { t: 0, gpos, alive, boxes, pressed, pp, events, timer, tocc, gateUse, fidx, falive };
+}
+
+// Movers resolve in a fixed order (ghosts by age, then the present) so a replayed
+// ghost sees exactly the world it saw when it was recorded, unless the present
+// changed something. A ghost whose recorded push is now blocked is a paradox.
+// Timed plates fire only on the tick something arrives on them; standing still does not extend them.
+// Returns null when the present's own move is illegal, unless `force` is set.
+function stepState(L, ghosts, prev, pp, force) {
+  const t = prev.t + 1;
+  const alive = prev.alive.slice();
+  const boxes = prev.boxes.map(b => b.slice());
+  const gpos = prev.gpos.slice();
+  const gateUse = prev.gateUse.slice();
+  const events = [];
+  for (let i = 0; i < ghosts.length; i++) {
+    const from = gpos[i], to = posAt(ghosts[i], t);
+    gpos[i] = to;
+    if (!alive[i]) continue;
+    const dx = to[0] - from[0], dy = to[1] - from[1];
+    if (!dx && !dy) continue;
+    const gc = cellAt(L, to[0], to[1]).gate;
+    if (gc >= 0) {
+      if (gateUse[gc] !== null && gateUse[gc] !== 'g' + i) {
+        alive[i] = false;
+        events.push({ ghost: i, t, pos: from, kind: 'gate' });
+        continue;
+      }
+      gateUse[gc] = 'g' + i;
+    }
+    const bi = boxIndex(boxes, to[0], to[1]);
+    if (bi < 0) continue;
+    const occ = gpos.filter((p, j) => j !== i && alive[j]).concat([prev.pp]);
+    if (boxCanEnter(L, boxes, to[0] + dx, to[1] + dy, occ)) boxes[bi] = [to[0] + dx, to[1] + dy];
+    else { alive[i] = false; events.push({ ghost: i, t, pos: from, kind: 'box' }); }
+  }
+  const dx = pp[0] - prev.pp[0], dy = pp[1] - prev.pp[1];
+  if (dx || dy) {
+    const bi = boxIndex(boxes, pp[0], pp[1]);
+    if (bi >= 0) {
+      const occ = gpos.filter((p, j) => alive[j]);
+      if (boxCanEnter(L, boxes, pp[0] + dx, pp[1] + dy, occ)) boxes[bi] = [pp[0] + dx, pp[1] + dy];
+      else if (!force) return null;
+    }
+  }
+  if (dx || dy) {
+    const gc = cellAt(L, pp[0], pp[1]).gate;
+    if (gc >= 0) {
+      if (gateUse[gc] !== null && gateUse[gc] !== 'p') { if (!force) return null; }
+      else gateUse[gc] = 'p';
+    }
+  }
+  const tocc = timedOccupancy(L, gpos, alive, boxes, pp);
+  const timer = prev.timer.map(v => Math.max(0, v - 1));
+  L.timedPlates.forEach(([x, y], j) => {
+    if (tocc[j] && !prev.tocc[j]) timer[cellAt(L, x, y).plate] = L.timer;
+  });
+  const pressed = settle(L, ghosts, gpos, alive, boxes, pp, t, events, timer);
+  // The gold walker (the child self) follows a fixed route but waits at closed doors instead of
+  // walking into them. It never presses plates, so it moves after the world settles.
+  const fidx = prev.fidx.slice(), falive = prev.falive.slice();
+  L.future.forEach((route, j) => {
+    if (!falive[j]) return;
+    if (fidx[j] < route.length - 1) {
+      const [nx, ny] = route[fidx[j] + 1], c = cellAt(L, nx, ny);
+      if (!(c.door >= 0 && !doorOpen(c, pressed)) && boxIndex(boxes, nx, ny) < 0) fidx[j]++;
+    }
+    const [x, y] = route[fidx[j]], c = cellAt(L, x, y);
+    if (c.door >= 0 && !doorOpen(c, pressed)) {
+      falive[j] = false;
+      events.push({ ghost: -1, future: j, t, pos: [x, y], kind: 'future' });
+    }
+  });
+  const pc = cellAt(L, pp[0], pp[1]);
+  if (!force && pc.door >= 0 && !doorOpen(pc, pressed)) return null;
+  return { t, gpos, alive, boxes, pressed, pp, events, timer, tocc, gateUse, fidx, falive };
+}
+function simulate(L, ghosts, present) {
+  const states = [initialState(L, ghosts, present[0])];
+  for (let t = 1; t < present.length; t++) states.push(stepState(L, ghosts, states[t - 1], present[t], true));
+  return states;
+}
+
+// With `guard` on, a move that would erase a past self is refused and the paradox is reported instead.
+function checkMove(L, ghosts, present, states, dir, guard = true) {
+  const t = present.length - 1;
+  if (t >= L.T) return { ok: false, why: 'time' };
+  const d = DIRS[dir], cur = present[t];
+  const tg = [cur[0] + d[0], cur[1] + d[1]];
+  if (cellAt(L, tg[0], tg[1]).wall) return { ok: false, why: 'wall' };
+  // A gate's single ticket is decided by whoever enters first, so a future
+  // conflict with a past self has to be caught now, not on the tick it happens.
+  const gc = cellAt(L, tg[0], tg[1]).gate, use = gc >= 0 ? states[t].gateUse[gc] : null;
+  if (gc >= 0 && use === null && guard) {
+    for (let i = 0; i < ghosts.length; i++) {
+      if (!states[t].alive[i]) continue;
+      const g = ghosts[i];
+      for (let k = t + 1; k < g.length; k++) {
+        const entering = cellAt(L, g[k][0], g[k][1]).gate === gc && !(g[k - 1][0] === g[k][0] && g[k - 1][1] === g[k][1]);
+        if (entering) return { ok: false, why: 'paradox', events: [{ ghost: i, t: k, pos: g[k], kind: 'gate' }] };
+      }
+    }
+  }
+  if (gc >= 0 && use !== null && use !== 'p') return { ok: false, why: 'gate' };
+  const s = stepState(L, ghosts, states[t], tg, false);
+  if (!s) return { ok: false, why: 'blocked' };
+  if (guard && s.events.length) return { ok: false, why: 'paradox', events: s.events };
+  if (cellAt(L, tg[0], tg[1]).exit && !futureArrived(L, s)) return { ok: false, why: 'future' };
+  return { ok: true, tg };
+}
+
+function tryMove(L, ghosts, present, states, dir, guard = true) {
+  const r = checkMove(L, ghosts, present, states, dir, guard);
+  return r.ok ? r.tg : null;
+}// CORE-END
+
+// ================= Audio =================
+let AC = null, muted = false;
+function initAudio() {
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { AC = null; } }
+  if (AC && AC.state === 'suspended') AC.resume();
+}
+function tone(f0, dur, type = 'sine', vol = 0.1, f1 = null, delay = 0) {
+  if (!AC || muted) return;
+  const t = AC.currentTime + delay;
+  const o = AC.createOscillator(), g = AC.createGain();
+  o.type = type;
+  o.frequency.setValueAtTime(f0, t);
+  if (f1) o.frequency.exponentialRampToValueAtTime(f1, t + dur);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(vol, t + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(AC.destination);
+  o.start(t); o.stop(t + dur + 0.03);
+}
+function noise(dur, vol) {
+  if (!AC || muted) return;
+  const len = Math.floor(AC.sampleRate * dur);
+  const buf = AC.createBuffer(1, len, AC.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / len);
+  const src = AC.createBufferSource(), g = AC.createGain(), f = AC.createBiquadFilter();
+  f.type = 'bandpass'; f.frequency.value = 1400; f.Q.value = 0.8;
+  g.gain.value = vol;
+  src.buffer = buf; src.connect(f).connect(g).connect(AC.destination); src.start();
+}
+const sfx = {
+  step: () => tone(330 + Math.random() * 40, 0.07, 'triangle', 0.07),
+  wait: () => tone(196, 0.09, 'sine', 0.05),
+  bump: () => tone(110, 0.09, 'square', 0.035, 80),
+  door: open => tone(open ? 520 : 320, 0.16, 'triangle', 0.06, open ? 820 : 180),
+  rewind: () => { tone(900, 0.75, 'sawtooth', 0.035, 90); tone(620, 0.75, 'sine', 0.05, 70); },
+  loop: () => [392, 523].forEach((f, i) => tone(f, 0.25, 'triangle', 0.06, null, i * 0.08)),
+  paradox: () => { noise(0.4, 0.22); tone(170, 0.45, 'square', 0.05, 40); },
+  win: () => [523, 659, 784, 1047, 1319].forEach((f, i) => tone(f, 0.4, 'triangle', 0.075, null, i * 0.085)),
+  fail: () => { tone(300, 0.3, 'triangle', 0.06, 150); tone(220, 0.5, 'triangle', 0.06, 100, 0.15); },
+  undo: () => tone(440, 0.06, 'sine', 0.04, 330),
+  push: () => { tone(140, 0.12, 'triangle', 0.09, 90); noise(0.08, 0.05); },
+  bell: () => [1568, 1568, 1568].forEach((f, i) => tone(f, 0.12, 'square', 0.03, null, i * 0.07)),
+};
+
+// ================= Rendering helpers =================
+const cv = document.getElementById('c');
+const ctx = cv.getContext('2d');
+let VW = 0, VH = 0;
+function resize() {
+  const dpr = window.devicePixelRatio || 1;
+  VW = innerWidth; VH = innerHeight;
+  cv.width = Math.round(VW * dpr); cv.height = Math.round(VH * dpr);
+  cv.style.width = VW + 'px'; cv.style.height = VH + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+addEventListener('resize', resize);
+resize();
+
+const PLATE_COL = ['#3fd0ff', '#ff5fa2', '#b6ff5c', '#ffb347'];
+const FUTURE_COL = '#ffe7a3';
+const GHOST_COL = ['#ffcf5c', '#a78bfa', '#ff8a5c', '#5cffc8'];
+const FONT = '"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif';
+
+function rgba(hex, a) {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255},${(n >> 8) & 255},${n & 255},${a})`;
+}
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const easeIO = t => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+function rr(x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+function wrapText(text, maxW) {
+  const lines = [];
+  let line = '';
+  for (const ch of text) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxW && line) { lines.push(line); line = ch; }
+    else line = test;
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+function facingAt(path, t) {
+  for (let i = Math.min(t, path.length - 1); i > 0; i--) {
+    const dx = path[i][0] - path[i - 1][0], dy = path[i][1] - path[i - 1][1];
+    if (dx || dy) return [dx, dy];
+  }
+  return [0, 1];
+}
+
+// ================= Game state =================
+const G = {
+  mode: 'title', li: 0, L: null,
+  ghosts: [], present: [], states: [],
+  disp: 0, doorAnim: {}, particles: [],
+  banner: null, levelShow: 0, rewind: null, replay: null,
+  lastActTime: 0, bump: null, shakeT: -1e9,
+};
+
+function recompute() { G.states = simulate(G.L, G.ghosts, G.present); }
+function curTick() { return G.present.length - 1; }
+
+function loadLevel(i) {
+  G.li = i;
+  G.L = parseLevel(LEVELS[i]);
+  G.ghosts = [];
+  G.present = [G.L.start.slice()];
+  recompute();
+  G.disp = 0; G.mode = 'play'; G.doorAnim = {}; G.particles = []; G.banner = null;
+  G.levelShow = performance.now(); G.lastActTime = performance.now(); G.shortTries = 0;
+}
+
+function showBanner(text, color = '#e8ecf5') { G.banner = { text, color, time: performance.now() }; }
+
+const PARADOX_GUARD = true;
+const ONE_STEP_LINES = ['就差一步。', '还是差一步。', '没有别的你，替你按住它了。', '这一次，只有你。'];
+const COLOR_NAME = ['蓝色', '粉色', '绿色', '琥珀色'];
+
+function paradoxReason(ev) {
+  const n = ev.ghost + 1;
+  if (ev.kind === 'future') {
+    const c = cellAt(G.L, ev.pos[0], ev.pos[1]);
+    return `不能这样走：门另一边的他正站在${COLOR_NAME[c.door]}${c.inv ? '斜纹' : ''}门里，那一刻门会关上。等他走过去。`;
+  }
+  if (ev.kind === 'gate') return `不能这样走：第 ${n} 个你之后要从这个检票口过去，票只有一张。把它留给他，换一条路。`;
+  if (ev.kind === 'box') return `不能这样走：第 ${n} 个你要推的箱子会被挡住。别挡在箱子要去的地方。`;
+  const c = cellAt(G.L, ev.pos[0], ev.pos[1]), col = COLOR_NAME[c.door];
+  if (c.inv) return `不能这样走：第 ${n} 个你正要穿过${col}斜纹门，可那时它会关上。那一刻${col}按钮不能被踩住。`;
+  const timed = G.L.timedPlates.some(([x, y]) => cellAt(G.L, x, y).plate === c.door);
+  return `不能这样走：第 ${n} 个你正要穿过${col}门，可那时门是关着的。` +
+    (timed ? `那一刻${col}闹钟得正在响。` : `那一刻得有人或箱子按住${col}按钮。`);
+}
+
+function warnParadox(ev) {
+  let msg = paradoxReason(ev);
+  const any = Object.keys(DIRS).some(d => checkMove(G.L, G.ghosts, G.present, G.states, d, PARADOX_GUARD).ok);
+  if (!any) msg += ' 现在怎么走都不行，按 Z 往回撤几步。';
+  G.warn = { ghost: ev.ghost, future: ev.future, pos: ev.pos, time: performance.now() };
+  showBanner(msg, '#ff9fbf');
+}
+
+function act(dir) {
+  if (G.mode !== 'play') return;
+  const t = curTick();
+  if (t >= G.L.T) return;
+  const now = performance.now();
+  const mv = checkMove(G.L, G.ghosts, G.present, G.states, dir, PARADOX_GUARD);
+  if (!mv.ok) {
+    sfx.bump(); G.bump = { dir, time: now };
+    if (mv.why === 'paradox') warnParadox(mv.events[0]);
+    else if (mv.why === 'gate') showBanner('这个检票口已经有人过去了。每一轮，一张票只放一个人过去。', '#ffd28a');
+    else if (mv.why === 'future') showBanner('出口还没亮。等门另一边的他，走到你出发的地方。', FUTURE_COL);
+    else if (mv.why === 'blocked' && G.L.lastStand) {
+      const touched = G.present.some(p => cellAt(G.L, p[0], p[1]).plate >= 0);
+      showBanner(touched ? ONE_STEP_LINES[Math.min(G.shortTries++, ONE_STEP_LINES.length - 1)] : '门关着。', FUTURE_COL);
+    }
+    return;
+  }
+  const tg = mv.tg;
+  const prev = G.states[t];
+  G.present.push(tg);
+  recompute();
+  G.lastActTime = now;
+  const s = G.states[t + 1];
+  if (dir === 'W') sfx.wait(); else sfx.step();
+  let opened = false, closed = false;
+  for (const [x, y] of G.L.doors) {
+    const c = G.L.cells[y][x];
+    const a = doorOpen(c, prev.pressed), b = doorOpen(c, s.pressed);
+    if (!a && b) opened = true;
+    if (a && !b) closed = true;
+  }
+  if (opened) sfx.door(true); else if (closed) sfx.door(false);
+  if (s.boxes.some((b, j) => !same(b, prev.boxes[j]))) sfx.push();
+  if (s.timer.some((v, k) => v > prev.timer[k])) sfx.bell();
+  for (const ev of s.events) triggerParadox(ev);
+  const arrived = G.L.future.length > 0 && !futureArrived(G.L, prev) && futureArrived(G.L, s);
+  if (arrived && !G.L.lastStand) {
+    sfx.loop();
+    showBanner('他走到了你出发的地方。出口亮了。', FUTURE_COL);
+  }
+  if (G.L.lastStand && G.L.future.some((r, j) => prev.fidx[j] <= lastDoorIndex(G.L, r) && s.fidx[j] > lastDoorIndex(G.L, r))) {
+    showBanner('……是小时候的你。', FUTURE_COL);
+  }
+  if (cellAt(G.L, tg[0], tg[1]).exit || (arrived && G.L.lastStand)) {
+    sfx.win();
+    G.mode = 'replay';
+    G.replay = { start: now + 900, ticks: t + 1, speed: G.L.lastStand ? 2.5 : G.L.finale ? 3 : 4.5 };
+    G.banner = null;
+  }
+}
+
+function triggerParadox(ev) {
+  const lay = layout();
+  const col = ev.kind === 'future' ? FUTURE_COL : GHOST_COL[ev.ghost % GHOST_COL.length];
+  const cx = lay.ox + (ev.pos[0] + 0.5) * lay.cs, cy = lay.oy + (ev.pos[1] + 0.5) * lay.cs;
+  for (let i = 0; i < 46; i++) {
+    const a = Math.random() * Math.PI * 2, sp = 60 + Math.random() * 260;
+    G.particles.push({ x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 0, max: 0.6 + Math.random() * 0.7, col, size: 2 + Math.random() * 4 });
+  }
+  sfx.paradox();
+  G.shakeT = performance.now();
+  showBanner(ev.kind === 'future' ? '悖论！门另一边的他被门夹住，从时间里消失了'
+    : ev.kind === 'box' ? `悖论！第 ${ev.ghost + 1} 个你推不动箱子了，那段过去断掉了`
+    : `悖论！第 ${ev.ghost + 1} 个你被门夹住，从时间里消失了`, '#ff7aa8');
+}
+
+function undo() {
+  if (G.mode === 'fail') G.mode = 'play';
+  if (G.mode !== 'play') return;
+  if (G.present.length > 1) {
+    G.present.pop();
+  } else if (G.ghosts.length > 0) {
+    G.present = G.ghosts.pop().slice();
+    while (G.present.length > 1 && G.present.length - 1 >= G.L.T) G.present.pop();
+    G.disp = curTick();
+    showBanner('撤回到上一个你');
+  } else return;
+  recompute();
+  sfx.undo();
+  G.lastActTime = performance.now();
+}
+
+function startRewind() {
+  G.mode = 'rewind';
+  G.rewind = { start: performance.now(), from: G.disp, dur: 850 };
+  sfx.rewind();
+}
+function finishRewind() {
+  G.ghosts.push(G.present.slice());
+  G.present = [G.L.start.slice()];
+  recompute();
+  G.disp = 0; G.mode = 'play'; G.lastActTime = performance.now();
+  showBanner(`第 ${G.ghosts.length + 1} 个你出发了 · 刚才的你会把一切再做一遍`);
+  sfx.loop();
+}
+// ================= Story & tutorial =================
+// Chapter numbers come from the order here, so inserting a chapter renumbers the rest.
+const CHAPTERS = [
+  { id: 'prologue', title: '序章' },
+  {
+    id: 'yard', age: '7 岁', place: '外婆家的院子',
+    lines: ['梦把他带回了外婆家的院子。', '那年他七岁，总想一个人搬动院子里那只大木箱。', '外婆说：一个人做不到的事，不丢人。'],
+  },
+  {
+    id: 'exam', age: '17 岁', place: '高考前夜的教室',
+    lines: ['高考前夜，空荡荡的教室。', '墙上的钟走得很响，每一下都像在催他。', '那时他以为，只有跑得比时间快才行。'],
+  },
+  {
+    id: 'station', age: '22 岁', place: '离家的火车站',
+    lines: ['离家那天的火车站。', '检票口一次只放一个人过去。', '他一直以为，那天是他一个人走的。'],
+  },
+  {
+    id: 'rain', age: '26 岁', place: '下雨的那天',
+    lines: ['下雨的那天。', '那天他搞砸了一件很重要的事，从此不愿再想起那时的自己。', '可在这里，伤害过去的自己，路就会断。'],
+  },
+  {
+    id: 'finale', title: '终章', age: '30 岁', place: '凌晨三点的出租屋',
+    lines: ['凌晨三点，出租屋。', '梦快要醒了。一路上的他，好像都回到了这里。', '门的另一边，也有一个人在等。'],
+  },
+  {
+    id: 'epilogue', title: '尾声', age: '30 岁', place: '梦醒之前',
+    lines: ['回声一个一个散去了。', '只剩下他自己。', '门的另一边，那个金色的身影还在等。'],
+  },
+];
+const AGES = CHAPTERS.filter(c => c.age && !c.title).map(c => c.age);
+const PRESENT_AGE = CHAPTERS.find(c => c.id === 'finale').age;
+const CN_NUM = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+function chapterIndex(id) { return CHAPTERS.findIndex(c => c.id === id); }
+function chapterShort(id) {
+  const i = chapterIndex(id);
+  return i <= 0 ? CHAPTERS[0].title : `${CHAPTERS[i].title || '第' + CN_NUM[i] + '章'} · ${CHAPTERS[i].age}`;
+}
+function chapterTitle(id) {
+  const i = chapterIndex(id);
+  return i <= 0 ? CHAPTERS[0].title : `${chapterShort(id)} · ${CHAPTERS[i].place}`;
+}
+function levelLabel(li) {
+  const ch = LEVELS[li].ch;
+  if (chapterIndex(ch) <= 0) return chapterTitle(ch);
+  const inCh = LEVELS.map((l, i) => i).filter(i => LEVELS[i].ch === ch);
+  return `${chapterTitle(ch)} · ${inCh.indexOf(li) + 1} / ${inCh.length}`;
+}
+function chapterCard(id) {
+  const c = CHAPTERS[chapterIndex(id)];
+  return [chapterTitle(id), ''].concat(c.lines || []);
+}
+const STORY_INTRO = [
+  '凌晨三点。',
+  '林一盯着屏幕上第 47 封没有回音的简历。',
+  '他觉得自己被困住了。而且，只有他一个人。',
+  '他趴在桌上，睡着了。',
+];
+const ENDING = [
+  ['凌晨三点十七分。', '林一醒了。', '屏幕还亮着。第 47 封简历，依然没有回音。'],
+  ['他想起梦里的那些人。', '7 岁的他，推动过一只比自己还重的木箱。', '17 岁的他，在铃声里穿过了那扇门。', '22 岁的他，一个人走过了检票口。', '26 岁的他，终于学会了放手。'],
+  ['还有那个金色的小孩。', '最后，是他留在按钮上，替那个小孩按住了门。', '那一刻他才明白，那些回声为什么愿意留下来。'],
+  ['小孩会长大。', '会推箱子，会赶考，会离家，会淋一场雨，', '也会在某个凌晨三点，觉得只有自己一个人。', '到那时，会有很多个他，替他按住门。'],
+  ['林一新建了一个文档，', '写下第 48 封。'],
+];
+const STORY_LINE_MS = 1500;
+function playPages(pages, done) {
+  if (!pages.length) { done(); return; }
+  startStory(pages[0], () => playPages(pages.slice(1), done));
+}
+function startStory(lines, then) { G.mode = 'story'; G.story = { lines, start: performance.now(), then }; }
+function storyAllShown(now) { return now - G.story.start >= (G.story.lines.length - 1) * STORY_LINE_MS + 600; }
+
+const TUT_TEXT = [
+  '用方向键（或 WASD）走动。去踩住那个发光的按钮。',
+  '按钮被踩住，门就开了。可只要你一离开，它就会关上。走下来试试。',
+  '一个人做不到。每一轮的时间有限（看上方的白条）。回到按钮上站好，然后按 Enter。',
+  '刚才的你留了下来，他会把你刚才的每一步原样再做一遍。你先走到门前。',
+  '门还关着，他还在路上。按空格原地等一步，直到门上出现「下一步开」。',
+  '他踩住按钮了。现在走进门里，然后走进出口。',
+];
+const same = (a, b) => a[0] === b[0] && a[1] === b[1];
+function presentOnPlate() {
+  const c = G.present[G.present.length - 1];
+  return cellAt(G.L, c[0], c[1]).plate >= 0;
+}
+// Derived purely from current state so undo and early Enter never leave the guide stuck.
+function tutStage() {
+  const L = G.L, P = G.present, cur = P[P.length - 1], plate = L.plates[0], door = L.doors[0];
+  if (G.ghosts.length === 0) {
+    const i = P.findIndex(p => same(p, plate));
+    if (i < 0) return 0;
+    return P.slice(i).some(p => !same(p, plate)) ? 2 : 1;
+  }
+  const S = G.states[G.states.length - 1];
+  const next = stepState(L, G.ghosts, S, cur, true);
+  const onDoorRow = cur[1] === door[1];
+  if (next.pressed[0] || (onDoorRow && cur[0] >= door[0])) return 5;
+  if (onDoorRow && cur[0] === door[0] - 1) return 4;
+  return 3;
+}
+function tutTarget(stage) {
+  const L = G.L, door = L.doors[0];
+  if (stage === 0 || stage === 2) return L.plates[0];
+  if (stage === 3) return [door[0] - 1, door[1]];
+  if (stage === 5) return L.exit;
+  return null;
+}
+function tutorialBlocksEnd() { return G.L.tutorial && G.ghosts.length === 0 && !presentOnPlate(); }
+
+function endLoopEarly() {
+  if (G.mode !== 'play') return;
+  if (tutorialBlocksEnd()) { showBanner('先站到按钮上，再按 Enter', '#ffe08a'); return; }
+  if (G.ghosts.length < G.L.selves - 1) startRewind();
+  else if (G.L.lastStand) showBanner('没有别的你了。这一次，只有你。', FUTURE_COL);
+  else showBanner('这已经是最后一个你了，没法再回到过去', '#ffb3b3');
+}
+function timeUp() {
+  if (tutorialBlocksEnd()) {
+    G.present = [G.L.start.slice()];
+    recompute();
+    G.disp = 0; G.lastActTime = performance.now();
+    sfx.rewind();
+    showBanner('时间用完了，你回到了起点。直接去按钮上站好，再按 Enter', '#ffe08a');
+    return;
+  }
+  if (G.ghosts.length < G.L.selves - 1) startRewind();
+  else { G.mode = 'fail'; sfx.fail(); }
+}
+function nextLevel() {
+  const n = G.li + 1;
+  if (n < LEVELS.length && LEVELS[n].ch !== LEVELS[G.li].ch) startStory(chapterCard(LEVELS[n].ch), () => loadLevel(n));
+  else if (n < LEVELS.length) loadLevel(n);
+  else playPages(ENDING, () => { G.mode = 'end'; G.endShow = performance.now(); sfx.win(); });
+}
+
+// ================= Input =================
+const KEYMAP = {
+  ArrowUp: 'U', w: 'U', W: 'U', ArrowDown: 'D', s: 'D', S: 'D',
+  ArrowLeft: 'L', a: 'L', A: 'L', ArrowRight: 'R', d: 'R', D: 'R', ' ': 'W',
+};
+addEventListener('keydown', e => {
+  initAudio();
+  const k = e.key;
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(k)) e.preventDefault();
+  if (k === 'm' || k === 'M') { muted = !muted; return; }
+  if (G.mode === 'story') {
+    if (k === 'Enter' || k === ' ') {
+      if (storyAllShown(performance.now())) G.story.then();
+      else G.story.start = performance.now() - G.story.lines.length * STORY_LINE_MS;
+    }
+    return;
+  }
+  if (/^[0-9]$/.test(k) && +k < LEVELS.length) { loadLevel(+k); return; }
+  if ((k === '[' || k === ']') && G.mode !== 'title') { loadLevel(clamp(G.li + (k === ']' ? 1 : -1), 0, LEVELS.length - 1)); return; }
+  if (G.mode === 'title') { if (k === 'Enter' || k === ' ') startStory(STORY_INTRO, () => loadLevel(0)); return; }
+  if (G.mode === 'end') { if (k === 'Enter') G.mode = 'title'; return; }
+  if (G.mode === 'rewind') return;
+  if (G.mode === 'replay') { if (k === 'Enter' || k === ' ') G.mode = 'won'; return; }
+  if (G.mode === 'won') {
+    if (k === 'Enter') nextLevel();
+    else if (k === ' ') G.replay = { start: performance.now(), ticks: G.replay.ticks, speed: G.replay.speed }, G.mode = 'replay';
+    else if (k === 'r' || k === 'R') loadLevel(G.li);
+    return;
+  }
+  if (k === 'r' || k === 'R') { loadLevel(G.li); sfx.rewind(); return; }
+  if (k === 'z' || k === 'Z' || k === 'Backspace') { undo(); return; }
+  if (G.mode === 'fail') return;
+  if (k === 'Enter') { endLoopEarly(); return; }
+  if (KEYMAP[k]) { if (!e.repeat || k !== ' ') act(KEYMAP[k]); }
+});
+
+// ================= Drawing =================
+function layout() {
+  const L = G.L, topH = 130, botH = 140;
+  const cs = Math.floor(Math.min((VW - 60) / L.w, (VH - topH - botH) / L.h, 76));
+  const ox = Math.floor((VW - cs * L.w) / 2);
+  const oy = Math.floor(topH + (VH - topH - botH - cs * L.h) / 2);
+  return { cs, ox, oy };
+}
+
+function nearFloor(L, x, y) {
+  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+    const c = cellAt(L, x + dx, y + dy);
+    if (!c.wall) return true;
+  }
+  return false;
+}
+
+function drawPolyline(pts, upto, color, width, dash) {
+  if (pts.length < 2 || upto <= 0) return;
+  ctx.save();
+  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (dash) ctx.setLineDash(dash);
+  ctx.beginPath();
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  const full = Math.min(Math.floor(upto), pts.length - 1);
+  for (let i = 1; i <= full; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+  const k = upto - Math.floor(upto);
+  if (full < pts.length - 1 && k > 0) {
+    const a = pts[full], b = pts[full + 1];
+    ctx.lineTo(lerp(a[0], b[0], k), lerp(a[1], b[1], k));
+  }
+  ctx.stroke();
+  ctx.restore();
+}
+
+function drawScene(f, lay, now, dt) {
+  const { cs, ox, oy } = lay, L = G.L, st = G.states;
+  const ti = clamp(Math.round(f), 0, st.length - 1), S = st[ti];
+  const C = (x, y) => [ox + (x + 0.5) * cs, oy + (y + 0.5) * cs];
+
+  for (let y = 0; y < L.h; y++) for (let x = 0; x < L.w; x++) {
+    const c = L.cells[y][x], px = ox + x * cs, py = oy + y * cs;
+    if (c.wall) {
+      if (!nearFloor(L, x, y)) continue;
+      ctx.fillStyle = '#0a0d15'; ctx.fillRect(px, py, cs, cs);
+      ctx.fillStyle = 'rgba(255,255,255,0.025)';
+      for (let k = 1; k < 4; k++) ctx.fillRect(px, py + (k * cs) / 4, cs, 1);
+    } else {
+      ctx.fillStyle = (x + y) & 1 ? '#1a2234' : '#1d263a';
+      ctx.fillRect(px, py, cs, cs);
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1; ctx.strokeRect(px + 0.5, py + 0.5, cs - 1, cs - 1);
+    }
+  }
+
+  // exit portal: stays dim until the gold walker has arrived
+  {
+    const [ex, ey] = C(L.exit[0], L.exit[1]), lit = L.lastStand || futureArrived(L, S) ? 1 : 0.25;
+    const g = ctx.createRadialGradient(ex, ey, 0, ex, ey, cs * 0.6);
+    g.addColorStop(0, `rgba(160,230,255,${0.35 * lit})`); g.addColorStop(1, 'rgba(160,230,255,0)');
+    ctx.fillStyle = g; ctx.fillRect(ex - cs, ey - cs, cs * 2, cs * 2);
+    for (let k = 0; k < 3; k++) {
+      const r = cs * (0.12 + 0.1 * k) + Math.sin(now / 300 + k * 1.3) * cs * 0.025 * lit;
+      ctx.beginPath(); ctx.arc(ex, ey, r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(200,240,255,${(0.8 - 0.22 * k) * lit})`; ctx.lineWidth = 2; ctx.stroke();
+    }
+  }
+
+  // plates
+  for (const [x, y] of L.plates) {
+    const c = L.cells[y][x], col = PLATE_COL[c.plate];
+    const [cx, cy] = C(x, y);
+    if (c.timed) {
+      const left = S.timer[c.plate], on = left > 0, r = cs * 0.3;
+      ctx.save();
+      if (on) { ctx.shadowColor = col; ctx.shadowBlur = 24; }
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.fillStyle = on ? rgba(col, 0.25) : rgba(col, 0.1); ctx.fill();
+      ctx.lineWidth = 2; ctx.strokeStyle = rgba(col, 0.6); ctx.stroke();
+      ctx.restore();
+      if (on) {
+        ctx.beginPath(); ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, r - 3, -Math.PI / 2, -Math.PI / 2 + (Math.PI * 2 * left) / L.timer);
+        ctx.closePath(); ctx.fillStyle = rgba(col, 0.85); ctx.fill();
+      } else {
+        ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx, cy - r * 0.6); ctx.moveTo(cx, cy); ctx.lineTo(cx + r * 0.45, cy); ctx.stroke();
+      }
+      continue;
+    }
+    const on = S.pressed[c.plate], s = cs * (on ? 0.52 : 0.6);
+    ctx.save();
+    if (on) { ctx.shadowColor = col; ctx.shadowBlur = 24; }
+    rr(cx - s / 2, cy - s / 2, s, s, cs * 0.1);
+    ctx.fillStyle = on ? rgba(col, 0.9) : rgba(col, 0.12); ctx.fill();
+    ctx.lineWidth = 2; ctx.strokeStyle = col; ctx.stroke();
+    ctx.restore();
+  }
+
+  // doors
+  for (const [x, y] of L.doors) {
+    const c = L.cells[y][x], key = x + ',' + y, open = doorOpen(c, S.pressed) ? 1 : 0;
+    let a = G.doorAnim[key];
+    if (a === undefined) a = open;
+    a += (open - a) * Math.min(1, dt * 14);
+    G.doorAnim[key] = a;
+    const px = ox + x * cs, py = oy + y * cs, col = PLATE_COL[c.door];
+    ctx.save();
+    ctx.strokeStyle = rgba(col, 0.4); ctx.lineWidth = 1.5;
+    if (c.inv) ctx.setLineDash([4, 3]);
+    ctx.strokeRect(px + 3.5, py + 3.5, cs - 7, cs - 7);
+    ctx.restore();
+    if (c.inv) {
+      ctx.save();
+      ctx.beginPath(); ctx.rect(px + 4, py + 4, cs - 8, cs - 8); ctx.clip();
+      ctx.strokeStyle = rgba(col, 0.13); ctx.lineWidth = cs * 0.07;
+      for (let k = -cs; k < cs * 2; k += cs * 0.22) { ctx.beginPath(); ctx.moveTo(px + k, py); ctx.lineTo(px + k + cs, py + cs); ctx.stroke(); }
+      ctx.restore();
+    }
+    const half = (cs - 8) / 2, w = half * (1 - a);
+    if (w > 0.5) {
+      ctx.save();
+      ctx.shadowColor = col; ctx.shadowBlur = 14 * (1 - a);
+      ctx.fillStyle = rgba(col, 0.85);
+      ctx.fillRect(px + 4, py + 4, w, cs - 8);
+      ctx.fillRect(px + cs - 4 - w, py + 4, w, cs - 8);
+      ctx.restore();
+      ctx.save();
+      ctx.beginPath(); ctx.rect(px + 4, py + 4, w, cs - 8); ctx.rect(px + cs - 4 - w, py + 4, w, cs - 8); ctx.clip();
+      if (c.inv) {
+        ctx.strokeStyle = 'rgba(10,13,20,0.55)'; ctx.lineWidth = cs * 0.07;
+        for (let k = -cs; k < cs * 2; k += cs * 0.22) { ctx.beginPath(); ctx.moveTo(px + k, py); ctx.lineTo(px + k + cs, py + cs); ctx.stroke(); }
+      } else {
+        ctx.fillStyle = 'rgba(10,13,20,0.35)';
+        for (let k = 1; k < 4; k++) ctx.fillRect(px, py + 4 + (k * (cs - 8)) / 4 - 1, cs, 2);
+      }
+      ctx.restore();
+    }
+  }
+
+  // ticket gates
+  L.gates.forEach(([x, y], j) => {
+    const px = ox + x * cs, py = oy + y * cs, used = S.gateUse[j] !== null;
+    const col = used ? '#ff6b6b' : '#ffd28a';
+    ctx.fillStyle = rgba(col, 0.08); ctx.fillRect(px + 3, py + 3, cs - 6, cs - 6);
+    ctx.fillStyle = rgba(col, 0.9);
+    ctx.fillRect(px + 5, py + 6, 5, cs - 12);
+    ctx.fillRect(px + cs - 10, py + 6, 5, cs - 12);
+    ctx.fillRect(px + 10, py + cs / 2 - 2, cs - 20, 4);
+    if (used) {
+      const m = cs * 0.3;
+      ctx.strokeStyle = rgba(col, 0.9); ctx.lineWidth = 2.5;
+      ctx.beginPath(); ctx.moveTo(px + m, py + m); ctx.lineTo(px + cs - m, py + cs - m);
+      ctx.moveTo(px + cs - m, py + m); ctx.lineTo(px + m, py + cs - m); ctx.stroke();
+    } else {
+      ctx.fillStyle = rgba(col, 0.9); ctx.font = `600 ${Math.max(10, Math.round(cs * 0.2))}px ${FONT}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('票', px + cs / 2, py + cs * 0.27);
+    }
+  });
+
+  // boxes
+  {
+    const bl = Math.floor(f), bk = f - bl;
+    const B0 = st[clamp(bl, 0, st.length - 1)], B1 = st[clamp(bl + 1, 0, st.length - 1)];
+    B0.boxes.forEach((b, j) => {
+      const b1 = B1.boxes[j];
+      const [cx, cy] = C(lerp(b[0], b1[0], bk), lerp(b[1], b1[1], bk));
+      const s = cs * 0.76, x = cx - s / 2, y = cy - s / 2;
+      ctx.fillStyle = '#8a6a43'; ctx.fillRect(x, y, s, s);
+      ctx.strokeStyle = '#c79a5e'; ctx.lineWidth = 3; ctx.strokeRect(x + 1.5, y + 1.5, s - 3, s - 3);
+      ctx.beginPath(); ctx.moveTo(x + 4, y + 4); ctx.lineTo(x + s - 4, y + s - 4); ctx.moveTo(x + s - 4, y + 4); ctx.lineTo(x + 4, y + s - 4);
+      ctx.lineWidth = 2; ctx.stroke();
+    });
+  }
+
+  // look-ahead hints: what happens next tick if you just wait
+  if (G.mode === 'play' && ti === curTick() && ti < L.T) {
+    const nx = stepState(L, G.ghosts, S, G.present[ti], true);
+    const pulse = 0.5 + 0.5 * Math.sin(now / 160);
+    for (const [x, y] of L.doors) {
+      const c = L.cells[y][x], a = doorOpen(c, S.pressed), b = doorOpen(c, nx.pressed);
+      if (a === b) continue;
+      const px = ox + x * cs, py = oy + y * cs;
+      ctx.save();
+      ctx.strokeStyle = `rgba(255,255,255,${0.35 + 0.5 * pulse})`; ctx.lineWidth = 2; ctx.setLineDash([5, 4]);
+      ctx.strokeRect(px + 1, py + 1, cs - 2, cs - 2);
+      ctx.restore();
+      ctx.fillStyle = '#ffffff'; ctx.font = `600 ${Math.max(10, Math.round(cs * 0.2))}px ${FONT}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'bottom';
+      ctx.fillText(b ? '下一步开' : '下一步关', px + cs / 2, py - 2);
+    }
+    for (const ev of nx.events) {
+      const [cx, cy] = C(ev.pos[0], ev.pos[1]);
+      ctx.fillStyle = `rgba(255,90,140,${0.5 + 0.5 * pulse})`;
+      ctx.font = `800 ${Math.round(cs * 0.4)}px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('!', cx, cy - cs * 0.48);
+    }
+  }
+
+  // tutorial target marker
+  if (L.tutorial && G.mode === 'play') {
+    const tg = tutTarget(tutStage());
+    if (tg) {
+      const px = ox + tg[0] * cs, py = oy + tg[1] * cs, pulse = 0.5 + 0.5 * Math.sin(now / 200);
+      const m = 2 - pulse * 4, len = cs * 0.28;
+      ctx.strokeStyle = `rgba(255,224,138,${0.55 + 0.45 * pulse})`; ctx.lineWidth = 3;
+      for (const [sx, sy] of [[0, 0], [1, 0], [0, 1], [1, 1]]) {
+        const x = px + (sx ? cs - m : m), y = py + (sy ? cs - m : m), dx = sx ? -len : len, dy = sy ? -len : len;
+        ctx.beginPath(); ctx.moveTo(x + dx, y); ctx.lineTo(x, y); ctx.lineTo(x, y + dy); ctx.stroke();
+      }
+    }
+  }
+
+  // trails
+  G.ghosts.forEach((g, i) => {
+    const col = GHOST_COL[i % GHOST_COL.length];
+    const pts = g.map(p => C(p[0], p[1]));
+    let death = Infinity;
+    for (let t = 0; t < st.length; t++) if (!st[t].alive[i]) { death = t; break; }
+    if (death === Infinity) drawPolyline(pts, pts.length - 1, rgba(col, 0.2), 2, [3, 6]);
+    drawPolyline(pts, Math.min(f, death), rgba(col, 0.45), 3);
+    if (death !== Infinity && f >= death) {
+      const [dx, dy] = C(...posAt(g, death));
+      ctx.strokeStyle = rgba(col, 0.8); ctx.lineWidth = 2.5;
+      const r = cs * 0.14;
+      ctx.beginPath(); ctx.moveTo(dx - r, dy - r); ctx.lineTo(dx + r, dy + r); ctx.moveTo(dx + r, dy - r); ctx.lineTo(dx - r, dy + r); ctx.stroke();
+    }
+  });
+  drawPolyline(G.present.map(p => C(p[0], p[1])), f, 'rgba(255,255,255,0.28)', 3);
+  const fl = Math.floor(f), k = f - fl;
+  const A0 = st[clamp(fl, 0, st.length - 1)], A1 = st[clamp(fl + 1, 0, st.length - 1)];
+  L.future.forEach((route, j) => {
+    const pts = route.map(p => C(p[0], p[1]));
+    drawPolyline(pts, pts.length - 1, rgba(FUTURE_COL, 0.2), 2, [3, 6]);
+    drawPolyline(pts, lerp(A0.fidx[j], A1.fidx[j], k), rgba(FUTURE_COL, 0.45), 3);
+    if (!futureArrived(L, S)) {
+      const [dx, dy] = pts[pts.length - 1], pulse = 0.5 + 0.5 * Math.sin(now / 300);
+      ctx.save();
+      ctx.beginPath(); ctx.arc(dx, dy, cs * (0.36 + 0.03 * pulse), 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(FUTURE_COL, 0.35 + 0.3 * pulse); ctx.lineWidth = 2; ctx.setLineDash([4, 4]); ctx.stroke();
+      ctx.restore();
+    }
+  });
+
+  // where each ghost goes next
+  if (G.mode === 'play') {
+    G.ghosts.forEach((g, i) => {
+      if (!S.alive[i]) return;
+      const a = posAt(g, ti), b = posAt(g, ti + 1);
+      if (a[0] === b[0] && a[1] === b[1]) return;
+      const [cx, cy] = C(b[0], b[1]);
+      ctx.beginPath(); ctx.arc(cx, cy, cs * 0.12, 0, Math.PI * 2);
+      ctx.strokeStyle = rgba(GHOST_COL[i % GHOST_COL.length], 0.7); ctx.lineWidth = 2; ctx.stroke();
+    });
+  }
+
+  // selves; in the finale's replay the numbers turn into ages
+  const reveal = L.finale && (G.mode === 'replay' || G.mode === 'won');
+  const items = [];
+  G.ghosts.forEach((g, i) => {
+    if (!S.alive[i]) return;
+    const a = posAt(g, fl), b = posAt(g, fl + 1), p = posAt(g, ti);
+    items.push({ x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), col: GHOST_COL[i % GHOST_COL.length], label: reveal && AGES[i] ? AGES[i] : String(i + 1), face: facingAt(g, fl + 1), seed: i });
+  });
+  L.future.forEach((route, j) => {
+    if (!S.falive[j]) return;
+    const a = route[A0.fidx[j]], b = route[A1.fidx[j]], p = route[S.fidx[j]];
+    const known = L.lastStand && S.fidx[j] > lastDoorIndex(L, route);
+    items.push({ x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: !same(a, b), key: p.join(), col: FUTURE_COL, label: known ? '小时候的你' : '?', face: A1.fidx[j] ? facingAt(route, A1.fidx[j]) : [-1, 0], seed: 7 + j });
+  });
+  {
+    const P = G.present, n = P.length - 1;
+    const a = P[Math.min(fl, n)], b = P[Math.min(fl + 1, n)], p = P[Math.min(ti, n)];
+    // in the last stand, once the child is home the present becomes an echo too
+    const echo = L.lastStand && futureArrived(L, S);
+    items.push({ x: lerp(a[0], b[0], k), y: lerp(a[1], b[1], k), moving: a[0] !== b[0] || a[1] !== b[1], key: p.join(), present: !echo, col: '#9fe8ff', seed: 3, label: reveal || echo ? PRESENT_AGE : null, face: facingAt(P, Math.min(fl + 1, n)) });
+  }
+  const groups = {};
+  items.forEach(it => { (groups[it.key] = groups[it.key] || []).push(it); });
+  Object.values(groups).forEach(arr => {
+    if (arr.length < 2) return;
+    arr.forEach((it, j) => {
+      const ang = (j / arr.length) * Math.PI * 2 - Math.PI / 2;
+      it.ox = Math.cos(ang) * 0.15; it.oy = Math.sin(ang) * 0.15;
+    });
+  });
+  for (const it of items) {
+    let [cx, cy] = C(it.x + (it.ox || 0), it.y + (it.oy || 0));
+    if (it.moving) cy -= Math.sin(k * Math.PI) * cs * 0.08;
+    if (it.present && G.bump && now - G.bump.time < 160) {
+      const p = 1 - (now - G.bump.time) / 160, d = DIRS[G.bump.dir];
+      cx += d[0] * 5 * p * Math.sin(p * 9); cy += d[1] * 5 * p * Math.sin(p * 9);
+    }
+    const r = cs * 0.27;
+    ctx.save();
+    if (it.present) {
+      ctx.shadowColor = '#9fe8ff'; ctx.shadowBlur = 26; ctx.fillStyle = '#f4f8ff';
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+    } else {
+      ctx.globalAlpha = 0.82 + 0.15 * Math.sin(now / 170 + it.seed * 2);
+      ctx.shadowColor = it.col; ctx.shadowBlur = 16; ctx.fillStyle = rgba(it.col, 0.5);
+      ctx.beginPath(); ctx.arc(cx, cy, r, 0, Math.PI * 2); ctx.fill();
+      ctx.shadowBlur = 0; ctx.lineWidth = 2; ctx.strokeStyle = it.col; ctx.stroke();
+    }
+    ctx.restore();
+    const [fx, fy] = it.face, qx = -fy, qy = fx;
+    ctx.fillStyle = '#0b0f1a';
+    for (const sgn of [-1, 1]) {
+      ctx.beginPath();
+      ctx.arc(cx + fx * r * 0.38 + qx * r * 0.33 * sgn, cy + fy * r * 0.38 + qy * r * 0.33 * sgn, r * 0.14, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (it.label) {
+      ctx.fillStyle = it.present ? '#ffffff' : it.col; ctx.font = `700 ${Math.max(10, Math.round(cs * (reveal ? 0.24 : 0.2)))}px ${FONT}`;
+      ctx.textAlign = reveal ? 'left' : 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(it.label, cx + r * (reveal ? 0.7 : 1.05), cy - r * 1.05);
+    }
+  }
+
+  // countdowns sit on top so whoever stands in the door or on the clock plate can't hide them
+  for (const [x, y] of L.doors) {
+    const c = L.cells[y][x];
+    if (S.timer[c.door] > 0) drawCountBadge(ox + x * cs, oy + y * cs, cs, S.timer[c.door], PLATE_COL[c.door]);
+  }
+  for (const [x, y] of L.timedPlates) {
+    const c = L.cells[y][x];
+    if (S.timer[c.plate] > 0) drawCountBadge(ox + x * cs, oy + y * cs, cs, S.timer[c.plate], PLATE_COL[c.plate]);
+  }
+
+  // refused-paradox warning: the endangered past self and the cell where it would break
+  if (G.warn && now - G.warn.time < 1600 && G.mode === 'play') {
+    const w = G.warn, a = 1 - (now - w.time) / 1600, pulse = 0.5 + 0.5 * Math.sin(now / 90);
+    const g = G.ghosts[w.ghost];
+    const rp = w.future !== undefined ? L.future[w.future][S.fidx[w.future]] : g ? posAt(g, ti) : null;
+    if (rp) {
+      const [gx, gy] = C(...rp);
+      ctx.beginPath(); ctx.arc(gx, gy, cs * (0.4 + 0.05 * pulse), 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(255,90,140,${a})`; ctx.lineWidth = 3; ctx.stroke();
+    }
+    const px = ox + w.pos[0] * cs, py = oy + w.pos[1] * cs;
+    ctx.save();
+    ctx.strokeStyle = `rgba(255,90,140,${a * (0.5 + 0.5 * pulse)})`; ctx.lineWidth = 3; ctx.setLineDash([6, 4]);
+    ctx.strokeRect(px + 2, py + 2, cs - 4, cs - 4);
+    ctx.restore();
+  }
+}
+
+function drawCountBadge(px, py, cs, n, col) {
+  const r = Math.max(8, cs * 0.16), bx = px + r + 2, by = py + r + 2;
+  ctx.beginPath(); ctx.arc(bx, by, r, 0, Math.PI * 2);
+  ctx.fillStyle = '#0b0f1a'; ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = col; ctx.stroke();
+  ctx.fillStyle = '#ffffff'; ctx.font = `700 ${Math.round(r * 1.25)}px ${FONT}`;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(String(n), bx, by + 0.5);
+}
+
+function drawParticles(dt) {
+  G.particles = G.particles.filter(p => (p.life += dt) < p.max);
+  for (const p of G.particles) {
+    p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= 0.94; p.vy *= 0.94;
+    const a = 1 - p.life / p.max;
+    ctx.fillStyle = rgba(p.col, a);
+    ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
+  }
+}
+
+function drawHUD(f, now) {
+  const L = G.L;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#6b7690'; ctx.font = `500 13px ${FONT}`;
+  ctx.fillText(levelLabel(G.li), VW / 2, 24);
+  ctx.fillStyle = '#e8ecf5'; ctx.font = `600 22px ${FONT}`;
+  ctx.fillText(L.name, VW / 2, 50);
+
+  const T = L.T, tw = Math.min(520, VW - 160), gap = 3, sw = (tw - gap * (T - 1)) / T, tx = (VW - tw) / 2, ty = 76, th = 8;
+  for (let i = 0; i < T; i++) {
+    const x = tx + i * (sw + gap), fill = clamp(f - i, 0, 1);
+    ctx.fillStyle = '#1c2436'; rr(x, ty, sw, th, 3); ctx.fill();
+    if (fill > 0) { ctx.fillStyle = T - i <= 3 ? '#ff7a7a' : '#e8ecf5'; rr(x, ty, Math.max(1, sw * fill), th, 3); ctx.fill(); }
+  }
+  ctx.font = `500 12px ${FONT}`; ctx.fillStyle = '#8a94ad';
+  ctx.textAlign = 'left'; ctx.fillText(`${Math.round(f)} / ${T} 步`, tx + tw + 12, ty + th / 2);
+  ctx.textAlign = 'right'; ctx.fillText('时间', tx - 12, ty + th / 2);
+
+  const total = L.selves, gs = 26, sy = 106, sx = VW / 2 - ((total - 1) * gs) / 2;
+  for (let j = 0; j < total; j++) {
+    const x = sx + j * gs;
+    ctx.beginPath(); ctx.arc(x, sy, 7, 0, Math.PI * 2);
+    if (j < G.ghosts.length) { ctx.fillStyle = GHOST_COL[j % GHOST_COL.length]; ctx.fill(); }
+    else if (j === G.ghosts.length) {
+      ctx.fillStyle = '#ffffff'; ctx.fill();
+      ctx.beginPath(); ctx.arc(x, sy, 10 + 2 * Math.sin(now / 250), 0, Math.PI * 2);
+      ctx.strokeStyle = 'rgba(255,255,255,0.35)'; ctx.lineWidth = 1.5; ctx.stroke();
+    } else { ctx.strokeStyle = '#3a4560'; ctx.lineWidth = 1.5; ctx.stroke(); }
+  }
+  ctx.fillStyle = '#8a94ad'; ctx.textAlign = 'right'; ctx.fillText('你们', sx - 18, sy);
+  if (L.future.length) {
+    const x = sx + total * gs + 10, arrived = futureArrived(L, G.states[clamp(Math.round(f), 0, G.states.length - 1)]);
+    ctx.beginPath(); ctx.arc(x, sy, 7, 0, Math.PI * 2);
+    ctx.fillStyle = rgba(FUTURE_COL, arrived ? 0.95 : 0.3); ctx.fill();
+    ctx.strokeStyle = FUTURE_COL; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = arrived ? '#0b0f1a' : FUTURE_COL; ctx.font = `700 10px ${FONT}`; ctx.textAlign = 'center';
+    ctx.fillText('?', x, sy + 0.5);
+  }
+
+  ctx.textAlign = 'center';
+  const tut = L.tutorial && (G.mode === 'play' || G.mode === 'fail');
+  if (tut) {
+    const st = tutStage();
+    ctx.font = `600 12px ${FONT}`; ctx.fillStyle = '#ffe08a';
+    ctx.fillText(`引导 ${st + 1} / ${TUT_TEXT.length}`, VW / 2, VH - 104);
+    ctx.font = `600 17px ${FONT}`; ctx.fillStyle = '#ffffff';
+  } else {
+    ctx.font = `400 15px ${FONT}`; ctx.fillStyle = '#aab3c8';
+  }
+  const lines = wrapText(tut ? TUT_TEXT[tutStage()] : L.hint, Math.min(720, VW - 80));
+  lines.forEach((ln, i) => ctx.fillText(ln, VW / 2, VH - 76 + i * 22 - (lines.length - 1) * 11));
+  ctx.font = `400 12px ${FONT}`; ctx.fillStyle = '#55607a';
+  ctx.fillText('方向键 / WASD 移动 · 空格 等待 · Z 撤销 · Enter 提前结束这一轮 · R 重开 · 0-9 / [ ] 选关 · M 静音', VW / 2, VH - 26);
+}
+
+function drawBanner(lay, now) {
+  const b = G.banner;
+  if (!b) return;
+  const age = now - b.time, dur = 2000 + 60 * b.text.length;
+  if (age > dur) { G.banner = null; return; }
+  const a = Math.min(1, age / 180) * Math.min(1, (dur - age) / 400);
+  const y = lay.oy + lay.cs * G.L.h + 24;
+  ctx.font = `600 15px ${FONT}`;
+  const w = ctx.measureText(b.text).width + 36;
+  ctx.globalAlpha = a;
+  rr(VW / 2 - w / 2, y - 16, w, 32, 16); ctx.fillStyle = 'rgba(20,26,40,0.92)'; ctx.fill();
+  ctx.strokeStyle = rgba(b.color, 0.4); ctx.lineWidth = 1; ctx.stroke();
+  ctx.fillStyle = b.color; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillText(b.text, VW / 2, y + 1);
+  ctx.globalAlpha = 1;
+}
+
+function drawCard(title, sub, foot, col) {
+  ctx.fillStyle = 'rgba(5,7,12,0.6)'; ctx.fillRect(0, 0, VW, VH);
+  const w = Math.min(460, VW - 60), h = 200, x = (VW - w) / 2, y = (VH - h) / 2;
+  rr(x, y, w, h, 18); ctx.fillStyle = '#121826'; ctx.fill();
+  ctx.strokeStyle = rgba(col, 0.35); ctx.lineWidth = 1.5; ctx.stroke();
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = col; ctx.font = `700 34px ${FONT}`; ctx.fillText(title, VW / 2, y + 58);
+  ctx.fillStyle = '#c3cbe0'; ctx.font = `400 16px ${FONT}`; ctx.fillText(sub, VW / 2, y + 108);
+  ctx.fillStyle = '#7a85a0'; ctx.font = `400 13px ${FONT}`; ctx.fillText(foot, VW / 2, y + 152);
+}
+
+function drawEchoes(now, cy, amp) {
+  const P = t => [VW / 2 + Math.sin(t * 0.8) * VW * 0.34, cy + Math.sin(t * 1.6) * amp];
+  for (let k = 5; k >= 0; k--) {
+    const t = now / 1000 - k * 0.5;
+    const col = k === 0 ? '#ffffff' : GHOST_COL[(k - 1) % GHOST_COL.length];
+    for (let j = 0; j < 14; j++) {
+      const [x, y] = P(t - j * 0.035);
+      ctx.fillStyle = rgba(col, (0.12 * (1 - j / 14)) * (k === 0 ? 1.4 : 1));
+      ctx.beginPath(); ctx.arc(x, y, 14 - j * 0.6, 0, Math.PI * 2); ctx.fill();
+    }
+    const [x, y] = P(t);
+    ctx.save(); ctx.shadowColor = col; ctx.shadowBlur = 20;
+    ctx.fillStyle = k === 0 ? '#f4f8ff' : rgba(col, 0.6);
+    ctx.beginPath(); ctx.arc(x, y, 14, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  }
+}
+
+function drawTitle(now) {
+  drawEchoes(now, VH * 0.47, VH * 0.2);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#f2f5fb'; ctx.font = `800 96px ${FONT}`; ctx.fillText('回 声', VW / 2, VH * 0.28);
+  ctx.fillStyle = '#6b7690'; ctx.font = `600 14px ${FONT}`; ctx.fillText('E   C   H   O', VW / 2, VH * 0.28 + 70);
+  ctx.fillStyle = '#c3cbe0'; ctx.font = `400 18px ${FONT}`;
+  ['每一轮，你只有十几步。', '时间用完，你会回到起点。', '而刚才的你会留下来，一模一样地再做一遍。'].forEach((s, i) => ctx.fillText(s, VW / 2, VH * 0.62 + i * 32));
+  ctx.globalAlpha = 0.55 + 0.45 * Math.sin(now / 400);
+  ctx.fillStyle = '#ffffff'; ctx.font = `600 18px ${FONT}`; ctx.fillText('按 Enter 开始', VW / 2, VH * 0.62 + 132);
+  ctx.globalAlpha = 1;
+  ctx.fillStyle = '#55607a'; ctx.font = `400 12px ${FONT}`;
+  ctx.fillText('方向键 / WASD 移动 · 空格 等待 · Z 撤销 · R 重开 · 0-9 / [ ] 选关 · M 静音', VW / 2, VH - 30);
+}
+
+function drawStory(now) {
+  const s = G.story, n = s.lines.length;
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.font = `400 22px ${FONT}`;
+  const top = VH / 2 - ((n - 1) * 48) / 2 - 20;
+  s.lines.forEach((ln, i) => {
+    const a = clamp((now - s.start - i * STORY_LINE_MS) / 600, 0, 1);
+    if (a <= 0) return;
+    ctx.fillStyle = `rgba(226,232,244,${a})`;
+    ctx.fillText(ln, VW / 2, top + i * 48 + (1 - a) * 8);
+  });
+  if (storyAllShown(now)) {
+    ctx.globalAlpha = 0.45 + 0.4 * Math.sin(now / 400);
+    ctx.fillStyle = '#ffffff'; ctx.font = `500 14px ${FONT}`;
+    ctx.fillText('按 Enter 继续', VW / 2, VH - 80);
+    ctx.globalAlpha = 1;
+  }
+}
+
+function drawEnd(now) {
+  const age = now - (G.endShow || 0), fade = d => clamp((age - d) / 900, 0, 1);
+  ctx.globalAlpha = fade(0);
+  drawEchoes(now, VH * 0.5, VH * 0.25);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+  ctx.fillStyle = '#f2f5fb'; ctx.font = `800 96px ${FONT}`; ctx.fillText('回 声', VW / 2, VH * 0.3);
+  ctx.globalAlpha = fade(800);
+  ctx.fillStyle = '#c3cbe0'; ctx.font = `400 20px ${FONT}`;
+  ctx.fillText('每一个过去的你，都在帮现在的你。', VW / 2, VH * 0.3 + 90);
+  ctx.globalAlpha = fade(2000);
+  ctx.fillText('而你，也会成为谁的回声。', VW / 2, VH * 0.3 + 128);
+  ctx.globalAlpha = fade(3200) * (0.55 + 0.45 * Math.sin(now / 400));
+  ctx.fillStyle = '#7a85a0'; ctx.font = `400 14px ${FONT}`;
+  ctx.fillText('谢谢你玩到这里 · 按 Enter 回到标题', VW / 2, VH * 0.78);
+  ctx.globalAlpha = 1;
+}
+
+let lastNow = performance.now();
+function frame(now) {
+  const dt = Math.min(0.05, (now - lastNow) / 1000);
+  lastNow = now;
+
+  if (G.mode === 'play' || G.mode === 'fail') {
+    const target = curTick();
+    G.disp += (target - G.disp) * Math.min(1, dt * 16);
+    if (Math.abs(target - G.disp) < 0.002) G.disp = target;
+    if (G.mode === 'play' && curTick() >= G.L.T && now - G.lastActTime > 420) timeUp();
+  } else if (G.mode === 'rewind') {
+    const p = (now - G.rewind.start) / G.rewind.dur;
+    if (p >= 1) finishRewind();
+    else G.disp = G.rewind.from * (1 - easeIO(p));
+  } else if (G.mode === 'replay') {
+    const r = G.replay;
+    if (now < r.start) G.disp = r.ticks;
+    else {
+      const fr = ((now - r.start) / 1000) * r.speed;
+      G.disp = Math.min(fr, r.ticks);
+      if (fr > r.ticks + 1.4) G.mode = 'won';
+    }
+  } else if (G.mode === 'won') {
+    G.disp = G.replay.ticks;
+  }
+
+  ctx.fillStyle = '#07090f'; ctx.fillRect(0, 0, VW, VH);
+
+  if (G.mode === 'title') drawTitle(now);
+  else if (G.mode === 'story') drawStory(now);
+  else if (G.mode === 'end') drawEnd(now);
+  else {
+    const lay = layout();
+    ctx.save();
+    const sp = (now - G.shakeT) / 350;
+    if (sp < 1) ctx.translate((Math.random() - 0.5) * 10 * (1 - sp), (Math.random() - 0.5) * 10 * (1 - sp));
+    drawScene(G.disp, lay, now, dt);
+    drawParticles(dt);
+    ctx.restore();
+    drawHUD(G.disp, now);
+
+    if (G.mode === 'rewind') {
+      ctx.fillStyle = 'rgba(70,30,140,0.18)'; ctx.fillRect(0, 0, VW, VH);
+      for (let i = 0; i < 10; i++) {
+        ctx.fillStyle = `rgba(170,130,255,${Math.random() * 0.1})`;
+        ctx.fillRect(0, Math.random() * VH, VW, 1 + Math.random() * 6);
+      }
+      ctx.fillStyle = '#d9ccff'; ctx.font = `700 28px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('◀◀  回到起点', VW / 2, lay.oy + (lay.cs * G.L.h) / 2);
+    }
+    if (G.mode === 'replay' && now >= G.replay.start) {
+      ctx.font = `600 14px ${FONT}`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const txt = G.L.lastStand ? '你留了下来，成了他的回声' : G.L.finale ? '原来，都是你' : '全员回放 · 所有的你，同时行动';
+      const w = ctx.measureText(txt).width + 32, y = lay.oy + lay.cs * G.L.h + 24;
+      rr(VW / 2 - w / 2, y - 13, w, 26, 13); ctx.fillStyle = 'rgba(200,243,255,0.12)'; ctx.fill();
+      ctx.fillStyle = '#c8f3ff'; ctx.fillText(txt, VW / 2, y);
+    }
+
+    const ls = now - G.levelShow, introDur = G.L.intro ? 3400 : 1700;
+    if (G.mode === 'play' && ls < introDur) {
+      const a = Math.min(1, ls / 200) * Math.min(1, (introDur - ls) / 500);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = 'rgba(7,9,15,0.8)'; ctx.fillRect(lay.ox, lay.oy, lay.cs * G.L.w, lay.cs * G.L.h);
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      const cy = lay.oy + (lay.cs * G.L.h) / 2;
+      ctx.fillStyle = '#8a94ad'; ctx.font = `500 16px ${FONT}`; ctx.fillText(chapterShort(G.L.ch), VW / 2, cy - 30);
+      ctx.fillStyle = '#ffffff'; ctx.font = `700 40px ${FONT}`; ctx.fillText(G.L.name, VW / 2, cy + 12);
+      if (G.L.intro) {
+        ctx.globalAlpha = a * clamp((ls - 900) / 500, 0, 1);
+        ctx.fillStyle = '#c3cbe0'; ctx.font = `400 17px ${FONT}`; ctx.fillText(G.L.intro, VW / 2, cy + 56);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    drawBanner(lay, now);
+
+    if (G.mode === 'won') {
+      const last = G.li + 1 >= LEVELS.length;
+      const L = G.L;
+      const title = L.tutorial ? '序章完成' : L.lastStand ? '回声' : L.finale ? '所有的你' : '通关';
+      const sub = L.tutorial ? '你和过去的自己，一起打开了第一扇门。'
+        : L.lastStand ? '你留了下来，替小时候的你按住了门。'
+        : L.finale ? `${AGES.slice(0, G.ghosts.length).concat([PRESENT_AGE]).join('、')}。还有门那边的那个人。`
+        : `用了 ${G.ghosts.length + 1} 个你 · 共 ${G.replay.ticks} 步`;
+      const foot = L.lastStand ? 'Enter 继续 · 空格 再看一遍' : `${last ? 'Enter 看结局' : 'Enter 下一关'} · 空格 再看一遍回放 · R 重玩`;
+      drawCard(title, sub, foot, L.finale || L.lastStand ? FUTURE_COL : '#c8f3ff');
+    } else if (G.mode === 'fail') {
+      drawCard('时间到了', G.L.lastStand ? '门的另一边，他还在等。' : '已经没有更多的你了。', 'Z 撤销一步 · R 重开本关', '#ff9a9a');
+    }
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
