@@ -6,7 +6,11 @@
 
 ## 宣传短片 · Trailer
 
-- **官方宣传视频（61 秒）**：展示时间回溯解谜核心玩法、五大场景时空协作与视听氛围，视频文件位于 [`output/trailer.mp4`](output/trailer.mp4)。
+**官方宣传视频 · 61 秒**：时间回溯解谜、五大场景时空协作，以及第 47 号磁带的故事。
+
+https://github.com/user-attachments/assets/1e4aa4e3-6973-4ae8-bd25-6f004d392f57
+
+点击播放器即可观看完整宣传片（720p）。[下载高清原片（1080p）](output/trailer.mp4)。
 
 ## 运行
 
