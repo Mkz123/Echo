@@ -10,7 +10,7 @@
 
 https://github.com/user-attachments/assets/1e4aa4e3-6973-4ae8-bd25-6f004d392f57
 
-点击播放器即可观看完整宣传片（720p）。[下载高清原片（1080p）](output/trailer.mp4)。
+点击播放器即可观看完整宣传片（720p）。
 
 ## 运行
 
@@ -42,7 +42,7 @@ https://github.com/user-attachments/assets/1e4aa4e3-6973-4ae8-bd25-6f004d392f57
 | 定时开关 | 定时喷淋 | 电焊闸 | 离心机开关 | 广播按钮 | 过载电闸 |
 | 单人闸机 | 单人栅门 | 单人闸口 | 消毒闸 | 检票闸机 | 单人闸机 |
 
-每个场景有自己的整景背景、机关外观和 47 的服装（见下方“完整整景背景”）。场景数据在 `echo.html` 的 `SCENES` 表里。
+每个场景有自己的整景背景、机关外观和 47 的服装，全部内嵌在 `echo.html` 中。
 
 ## 章节
 
@@ -67,38 +67,19 @@ https://github.com/user-attachments/assets/1e4aa4e3-6973-4ae8-bd25-6f004d392f57
 
 播放时：空格暂停 / 继续，Enter 或 Esc 跳过，M 静音，右下角是进度。
 
-两段视频都是 720p H.264（合计约 4 MB），和标题画面背景一起 base64 内嵌在 `echo.html` 的 `FILM` 数据块里，单个 HTML 离线也能放，不需要本地服务。文件在 `assets/film/`，制作致谢见 [assets/film/CREDITS.md](assets/film/CREDITS.md)。换了成片后运行：
-
-```sh
-python tools/film/build_film.py 开场.mp4 片尾.mp4 标题背景.png   # 重新压成 720p 并写回 echo.html
-python tools/film/build_film.py                                   # 只用 assets/film/ 里现有的文件重写数据块
-```
-
-原来的 15 秒翻页漫画片头已被序幕短片替换，它的分镜和说明留在 [docs/OPENING.md](docs/OPENING.md) 备查。
+两段视频都是 720p H.264（合计约 4 MB），和标题画面背景一起内嵌在 `echo.html` 中。单个 HTML 离线也能播放，不需要本地服务。短片制作与素材致谢见 [CREDITS.md](CREDITS.md)。
 
 ## 许遥的影像
 
-终章和尾声里那个沿着路走来的金色影像就是许遥，游戏里唯一的人。她用的是四视图设定图（`assets/characters/xuyao-turnaround.jpg`）：
+终章和尾声里那个沿着路走来的金色影像就是许遥，游戏里唯一的人。她有正面、朝左、朝右、背面四个朝向，游戏按她的移动方向切换。
 
-- `tools/characters/cut_xuyao.py` 把设定图切成正面、朝左、朝右、背面四张透明图，放在 `assets/characters/xuyao/`；`build_art.py` 再把它们压缩写进 `ART.xuyao`。
-- 游戏里按她下一步要走的方向选朝向。整张图重新染成琥珀色并半透明，叠加扫描线、上下扫过的光带和偶尔的信号抖动，看起来像一段旧录像。
-- 告别时她转向 47，身体轻轻摇晃，手边有挥手的波纹，然后慢慢淡出。
+影像呈琥珀色并半透明，叠加扫描线、扫过的光带和偶尔的信号抖动。告别时她转向 47，轻轻挥手，然后慢慢淡出。
+
 ## 完整整景背景
 
-场景背景按游戏实际配置制作，共 **35 张独立整景，覆盖 15 关的 36 个实际组合**，已接入游戏：每关每个场景都有自己的整幅背景，机关道具和 47 的服装也按场景换成对应的图（来自 `assets/map-study-v1/sprites/`）。所有图片压缩后内嵌在 `echo.html` 里，仍然是打开即玩的单文件。离线画册见 [背景画册](assets/backgrounds-v3/preview.html)。
+游戏内嵌 **35 张独立整景，覆盖 15 关的 36 个实际组合**。每关每个场景都有对应的整幅背景、机关道具和 47 的服装。
 
-生成的原画里，路径和逻辑格子并不完全对齐（个别地方偏出半格到一格）。玩法格子没有改动，而是给每张背景单独记录“每个格子画在哪里”，让 47、虚影和机关都站在画出来的路上：
-
-- `tools/scene-art/fit_anchors.py`：从每张原画里识别地面，把每个可走格子挪到最近的路面上，相邻格子一起移动，保持整齐；输出 `anchors.json`。
-- `tools/scene-art/overrides.json`：画面比地图压缩或错开太多的地方的手工位置（第 6、9 关温室，第 14 关空间站）。
-- `tools/scene-art/build_art.py`：把背景、格子位置和道具/47 精灵图压缩后写进 `echo.html` 的 `ART` 数据块。
-
-换了原画或调整位置后，依次运行这两个脚本（需要 Python、Pillow、numpy、scipy）：
-
-```sh
-python tools/scene-art/fit_anchors.py --review /tmp/anchors   # 可选：--review 输出每张图的格子叠加图
-python tools/scene-art/build_art.py
-```
+原画的路径与逻辑格子存在偏差，游戏使用每张背景单独记录的格子坐标，让 47、虚影和机关站在画出来的路上；玩法格子与机关关系保持一致。这些坐标和全部图片都包含在 `echo.html` 中。
 
 ## 五大场景专属环境音乐 · Ambient BGM
 
@@ -116,17 +97,10 @@ python tools/scene-art/build_art.py
 - **情境智能调度**：在序幕与尾声短片、片头封面、告别停带瞬间（`tapeStop`）及通关结算画面自动静音或淡出，与原声短片及剧情音效和谐共存。
 - **静音快捷切换**：随时按 `M` 键或点击声音控制，关卡游玩时屏幕即时弹出横幅提示（`静音` / `声音开启`），解禁时音量柔和恢复。
 
-### 合成与打包工具链
+## 仓库内容
 
-音乐全部由仓库内自带工具链生成并内嵌，无需外部音频资源：
+- [`echo.html`](echo.html)：完整游戏，包含代码、关卡、美术、短片和音乐。
+- [`README.md`](README.md)：运行方式、操作与玩法说明。
+- [`CREDITS.md`](CREDITS.md)：短片制作与素材致谢。
 
-- `tools/audio/generate_music.py`：纯 Python 标准库合成器，无需第三方音频库，通过物理建模、多谐波加法合成、ADSR 包络与立体声延迟算法，生成 44.1kHz 16-bit 无损立体声 WAV（存放于 `assets/audio/`）。
-- `tools/audio/build_bgm.py`：利用 ffmpeg 将五大场景音频压制为高质量轻量 MP3（总计约 2.4 MB），以 Base64 编码内嵌至 `echo.html` 的 `BGM` 数据块中。
-- `tools/audio/build_scene_videos.py`：将场景专属原画插画与生成的环境音乐结合，生成 720p H.264 视听演示视频，存放于 `output/`（含五大场景独立视频及 `all_scenes_preview.mp4` 全场景合集预览）。
-
-```sh
-python tools/audio/generate_music.py       # 纯 Python 合成五大场景音乐 WAV
-python tools/audio/build_bgm.py            # 压缩 MP3 并内嵌写入 echo.html
-python tools/audio/build_scene_videos.py   # 生成各场景原画+音效演示视频（可选）
-```
-
+原始素材、制作脚本、预览输出与设计文档已从当前版本移除，需要重新制作素材时可从 Git 历史恢复。README 中的宣传片由 GitHub 附件托管，独立于游戏文件。

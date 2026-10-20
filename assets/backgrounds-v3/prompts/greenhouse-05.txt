@@ -1,1 +1,0 @@
-Reuse the approved unified greenhouse painting from assets/map-study-v2/greenhouse-05-painting.png; original generation prompts retained in assets/map-study-v2/prompts/.
